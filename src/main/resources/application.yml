@@ -1,3 +1,17 @@
+#SERVER
 server:
   port: 21200
   address: 127.0.0.1
+
+#JPA/MYSQL
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/erp
+    username: root
+    password: 1234
