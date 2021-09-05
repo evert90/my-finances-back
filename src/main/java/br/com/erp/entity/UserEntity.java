@@ -1,5 +1,6 @@
 package br.com.erp.entity;
 
+import br.com.erp.api.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,8 @@ import static javax.persistence.GenerationType.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "user")
+@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+@Entity
 public class UserEntity {
 
     public UserEntity(String name, String email, String password) {
@@ -33,5 +35,9 @@ public class UserEntity {
 
     @Column
     private String password;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_USER;
 
 }

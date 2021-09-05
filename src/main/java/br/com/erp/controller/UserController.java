@@ -1,7 +1,7 @@
 package br.com.erp.controller;
 
+import br.com.erp.api.user.AuthenticatedUser;
 import br.com.erp.api.user.User;
-import br.com.erp.api.user.UserReadOnly;
 import br.com.erp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/users")
 public class UserController {
 
-    private final UserService service;
+    private final UserService userService;
 
     @PostMapping("/")
-    UserReadOnly save(@RequestBody User servico) {
-        return service.save(servico);
+    AuthenticatedUser save(@RequestBody User user) {
+        return userService.saveAndAuthenticate(user);
+    }
+
+    @PostMapping("/auth")
+    AuthenticatedUser authenticate(@RequestBody User user) {
+        return userService.authenticate(user);
     }
 }

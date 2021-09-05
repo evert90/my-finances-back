@@ -1,3 +1,7 @@
 package br.com.erp.api.user;
 
-public record User (Long id, String name, String email, String password) { }
+import br.com.erp.api.Role;
+
+import java.util.Set;
+
+public record User (Long id, String name, String email, String password, Set<Role> roles) { }
