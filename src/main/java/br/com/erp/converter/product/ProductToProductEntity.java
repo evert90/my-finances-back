@@ -3,6 +3,7 @@ package br.com.erp.converter.product;
 import br.com.erp.api.product.Product;
 import br.com.erp.entity.product.ProductEntity;
 import br.com.erp.repository.product.ProductCategoryRepository;
+import br.com.erp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ public class ProductToProductEntity implements Function<Product, ProductEntity> 
 
     private final ProductCategoryRepository categoryRepository;
 
+    private final UserService userService;
+
     @Override
     public ProductEntity apply(Product product) {
         return new ProductEntity(
@@ -26,7 +29,8 @@ public class ProductToProductEntity implements Function<Product, ProductEntity> 
                         .map(it -> categoryRepository.findById(it)
                                 .orElseThrow(() -> new RuntimeException("Categoria " + it + " não encontrada")))
                         .collect(toSet()),
-                product.details()
+                product.details(),
+                userService.getCurrentUser()
         );
 
     }

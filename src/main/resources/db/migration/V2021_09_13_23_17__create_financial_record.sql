@@ -5,7 +5,9 @@ CREATE TABLE financial_record(
     value DECIMAL(15,2) NOT NULL,
     date DATE NOT NULL,
     type VARCHAR(30) NOT NULL,
-    PRIMARY KEY(id)
+    user_id BIGINT(20) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 CREATE TABLE financial_record_tags(

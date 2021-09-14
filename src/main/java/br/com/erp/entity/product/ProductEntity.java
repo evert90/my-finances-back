@@ -1,5 +1,6 @@
 package br.com.erp.entity.product;
 
+import br.com.erp.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,5 +34,9 @@ public class ProductEntity {
 
     @Column
     private String details;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
 }

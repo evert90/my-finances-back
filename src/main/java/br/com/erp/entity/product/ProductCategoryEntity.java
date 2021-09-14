@@ -1,5 +1,6 @@
 package br.com.erp.entity.product;
 
+import br.com.erp.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,13 +14,14 @@ import static javax.persistence.GenerationType.TABLE;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product_category", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
+@Table(name = "product_category", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "user_id"})})
 @Entity
 public class ProductCategoryEntity {
 
-    public ProductCategoryEntity(Long id, String name) {
+    public ProductCategoryEntity(Long id, String name, UserEntity user) {
         this.id = id;
         this.name = name;
+        this.user = user;
     }
 
     @Id
@@ -36,5 +38,9 @@ public class ProductCategoryEntity {
             inverseJoinColumns = {@JoinColumn(name = "id_product")})
     @Column
     private Set<ProductEntity> products;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
 }

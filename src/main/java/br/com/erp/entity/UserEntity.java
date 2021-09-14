@@ -1,11 +1,15 @@
 package br.com.erp.entity;
 
 import br.com.erp.api.Role;
+import br.com.erp.entity.product.ProductCategoryEntity;
+import br.com.erp.entity.product.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import java.util.Set;
 
 import static javax.persistence.GenerationType.*;
 
@@ -39,5 +43,17 @@ public class UserEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_USER;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductCategoryEntity> productCategories;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductEntity> products;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<FinancialRecordEntity> financialRecords;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TagEntity> tags;
 
 }

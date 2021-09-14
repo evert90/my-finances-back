@@ -4,6 +4,7 @@ import br.com.erp.api.FinancialRecord;
 import br.com.erp.entity.FinancialRecordEntity;
 import br.com.erp.entity.TagEntity;
 import br.com.erp.repository.TagRepository;
+import br.com.erp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,11 @@ public class FinancialRecordToFinancialRecordEntity implements Function<Financia
 
     private final TagRepository tagRepository;
 
+    private final UserService userService;
+
     @Override
     public FinancialRecordEntity apply(FinancialRecord financialRecord) {
+        var user =  userService.getCurrentUser();
         return new FinancialRecordEntity(
                 financialRecord.id(),
                 financialRecord.name(),
@@ -28,8 +32,9 @@ public class FinancialRecordToFinancialRecordEntity implements Function<Financia
                 financialRecord.date(),
                 financialRecord.tags()
                         .stream()
-                        .map(it -> tagRepository.findById(it.id()).orElse(tagRepository.save(new TagEntity(it.id(), it.name()))))
-                        .collect(toSet())
+                        .map(it -> tagRepository.findById(it.id()).orElse(tagRepository.save(new TagEntity(it.id(), it.name(), user))))
+                        .collect(toSet()),
+                user
         );
     }
 
