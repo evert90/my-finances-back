@@ -6,8 +6,12 @@ import br.com.erp.api.user.UserReadOnly;
 import br.com.erp.converter.user.UserEntityToUserReadOnly;
 import br.com.erp.converter.user.UserReadOnlyToAuthenticatedUser;
 import br.com.erp.converter.user.UserToUserEntity;
+import br.com.erp.entity.UserEntity;
 import br.com.erp.repository.UserRepository;
+import br.com.erp.service.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import static java.util.Optional.ofNullable;
@@ -34,6 +38,13 @@ public class UserService {
         return userReadOnlyToAuthenticatedUser.apply(save(user));
     }
 
+    public UserEntity getCurrentUser() {
+        var userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return repository
+                .findById(userDetails.getId())
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário inválido ou não encontrado"));
+    }
+
     private UserReadOnly get(User user) {
         return ofNullable(repository.findByEmailAndPassword(user.email(), user.password()))
                 .map(userEntityToUserReadOnly)
@@ -46,5 +57,6 @@ public class UserService {
 
         return userEntityToUserReadOnly.apply(entity);
     }
+
 
 }

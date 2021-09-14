@@ -3,7 +3,7 @@ CREATE TABLE user (
     name VARCHAR(120) NOT NULL,
     email VARCHAR(200) NOT NULL,
     password VARCHAR(200) NOT NULL,
-    PRIMARY KEY(id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE hibernate_sequences (
