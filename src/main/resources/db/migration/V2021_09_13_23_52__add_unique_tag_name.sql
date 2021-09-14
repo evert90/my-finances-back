@@ -1,2 +1,0 @@
-ALTER TABLE tag
-ADD CONSTRAINT tag_name UNIQUE (name);

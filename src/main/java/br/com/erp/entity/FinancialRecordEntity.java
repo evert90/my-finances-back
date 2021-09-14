@@ -48,4 +48,8 @@ public class FinancialRecordEntity {
     @Column
     private Set<TagEntity> tags;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
 }

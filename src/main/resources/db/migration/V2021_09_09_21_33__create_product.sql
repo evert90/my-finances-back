@@ -2,7 +2,9 @@ CREATE TABLE product(
     id BIGINT(20) NOT NULL,
     name VARCHAR(300) NOT NULL,
     details TEXT NULL,
-    PRIMARY KEY(id)
+    user_id BIGINT(20) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 CREATE TABLE product_categories(
