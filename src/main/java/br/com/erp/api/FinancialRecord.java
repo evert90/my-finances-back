@@ -2,7 +2,7 @@ package br.com.erp.api;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 public record FinancialRecord(
         Long id,
@@ -11,5 +11,5 @@ public record FinancialRecord(
         BigDecimal value,
         LocalDate date,
         FinancialRecordType type,
-        Set<Tag> tags
+        List<Tag> tags
 ) { }

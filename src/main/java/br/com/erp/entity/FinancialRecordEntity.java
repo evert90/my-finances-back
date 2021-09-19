@@ -1,14 +1,12 @@
 package br.com.erp.entity;
 
 import br.com.erp.api.FinancialRecordType;
-import br.com.erp.entity.product.ProductCategoryEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.TABLE;
@@ -41,13 +39,17 @@ public class FinancialRecordEntity {
     @Column
     private LocalDate date;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "financial_record_tags",
             joinColumns = {@JoinColumn(name = "id_financial_record")},
             inverseJoinColumns = {@JoinColumn(name = "id_tag")})
     @Column
-    private Set<TagEntity> tags;
+    private List<TagEntity> tags;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
