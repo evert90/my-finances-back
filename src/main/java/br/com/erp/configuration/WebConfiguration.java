@@ -8,9 +8,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+
         registry.addMapping("/**")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedOrigins("http://localhost:3000", "https://erp-front-nf3vhyuz7-evert90.vercel.app")
+                .allowedOrigins(
+                        "http://localhost:3000",
+                        "https://erp-front-evert90.vercel.app",
+                        "https://erp-front-fn6e0ofsj-evert90.vercel.app")
                 .allowCredentials(true);
     }
 }

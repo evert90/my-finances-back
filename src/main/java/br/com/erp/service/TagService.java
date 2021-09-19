@@ -22,6 +22,8 @@ public class TagService {
 
     private final TagRepository repository;
 
+    private final UserService userService;
+
     public Tag save(Tag tag) {
         return ofNullable(tag)
                 .map(it -> repository.save(toEntity.apply(it)))
@@ -30,7 +32,7 @@ public class TagService {
     }
 
     public Set<Tag> getAll() {
-        return repository.findAll()
+        return repository.findByUser(userService.getCurrentUser())
                 .stream()
                 .map(toApi)
                 .collect(toSet());

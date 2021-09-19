@@ -39,7 +39,7 @@ public class UserService {
     }
 
     public UserEntity getCurrentUser() {
-        var userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        var userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return repository
                 .findById(userDetails.getId())
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário inválido ou não encontrado"));

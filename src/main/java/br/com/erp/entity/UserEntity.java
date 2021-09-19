@@ -3,9 +3,7 @@ package br.com.erp.entity;
 import br.com.erp.api.Role;
 import br.com.erp.entity.product.ProductCategoryEntity;
 import br.com.erp.entity.product.ProductEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -44,15 +42,23 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_USER;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductCategoryEntity> productCategories;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductEntity> products;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FinancialRecordEntity> financialRecords;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TagEntity> tags;
 
