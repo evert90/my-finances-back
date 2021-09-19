@@ -12,7 +12,7 @@ spring:
       ddl-auto: update
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/erp
+    url: jdbc:mysql://localhost:3306/erp?autoReconnect=true&useSSL=false
     username: root
     password: 1234
 

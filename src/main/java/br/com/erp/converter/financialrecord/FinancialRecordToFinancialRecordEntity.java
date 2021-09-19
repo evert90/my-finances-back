@@ -1,15 +1,24 @@
 package br.com.erp.converter.financialrecord;
 
 import br.com.erp.api.FinancialRecord;
+import br.com.erp.api.Tag;
 import br.com.erp.entity.FinancialRecordEntity;
 import br.com.erp.entity.TagEntity;
+import br.com.erp.entity.UserEntity;
 import br.com.erp.repository.TagRepository;
 import br.com.erp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
+import static java.util.Objects.*;
+import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.*;
 import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
@@ -22,7 +31,7 @@ public class FinancialRecordToFinancialRecordEntity implements Function<Financia
 
     @Override
     public FinancialRecordEntity apply(FinancialRecord financialRecord) {
-        var user =  userService.getCurrentUser();
+        var user = userService.getCurrentUser();
         return new FinancialRecordEntity(
                 financialRecord.id(),
                 financialRecord.name(),
@@ -30,12 +39,19 @@ public class FinancialRecordToFinancialRecordEntity implements Function<Financia
                 financialRecord.value(),
                 financialRecord.type(),
                 financialRecord.date(),
-                financialRecord.tags()
+                ofNullable(financialRecord.tags())
+                        .orElseGet(Collections::emptyList)
                         .stream()
-                        .map(it -> tagRepository.findById(it.id()).orElse(tagRepository.save(new TagEntity(it.id(), it.name(), user))))
-                        .collect(toSet()),
+                        .map(it ->
+                                tagRepository.findByUserAndName(user, it.name())
+                                .orElseGet(() -> saveTag(it, user)))
+                        .collect(toList()),
                 user
         );
+    }
+
+    private TagEntity saveTag(Tag tag, UserEntity user) {
+        return tagRepository.save(new TagEntity(tag.id(), tag.name(), user));
     }
 
 }

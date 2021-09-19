@@ -1,12 +1,11 @@
 package br.com.erp.entity;
 
-import br.com.erp.api.user.User;
-import br.com.erp.entity.product.ProductEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
-
 import java.util.Set;
 
 import static javax.persistence.GenerationType.TABLE;
@@ -31,13 +30,14 @@ public class TagEntity {
     @Column
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "financial_record_tags",
-            joinColumns = {@JoinColumn(name = "id_tag")},
-            inverseJoinColumns = {@JoinColumn(name = "id_financial_record")})
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "tags")
     @Column
-    private Set<ProductEntity> products;
+    private Set<FinancialRecordEntity> financialRecords;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;

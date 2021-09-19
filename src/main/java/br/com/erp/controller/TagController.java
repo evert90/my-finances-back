@@ -12,7 +12,7 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("api/tag")
+@RequestMapping("api/tags")
 public class TagController {
 
     private final TagService service;
