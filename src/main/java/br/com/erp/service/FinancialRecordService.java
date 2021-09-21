@@ -8,9 +8,11 @@ import br.com.erp.repository.FinancialRecordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
@@ -21,6 +23,8 @@ public class FinancialRecordService {
     private final FinancialRecordToFinancialRecordEntity toEntity;
 
     private final FinancialRecordEntityToFinanacialRecord toApi;
+
+    private final UserService userService;
 
     public FinancialRecord save(FinancialRecord financialRecord) {
         return ofNullable(financialRecord)
@@ -37,9 +41,9 @@ public class FinancialRecordService {
     }
 
     public Set<FinancialRecord> getAll() {
-        return repository.findAll()
+        return repository.findByUserOrderByDateDesc(userService.getCurrentUser())
                 .stream()
                 .map(toApi)
-                .collect(toSet());
+                .collect(toCollection(LinkedHashSet::new));
     }
 }
