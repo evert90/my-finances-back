@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TagRepository extends JpaRepository<TagEntity, Long> {
-    List<TagEntity> findByUser(UserEntity entity);
+    List<TagEntity> findByUserOrderByNameAsc(UserEntity entity);
     Optional<TagEntity> findByUserAndName(UserEntity entity, String name);
 }
