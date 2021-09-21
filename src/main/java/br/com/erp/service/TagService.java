@@ -7,10 +7,11 @@ import br.com.erp.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toCollection;
 
 @RequiredArgsConstructor
 @Service
@@ -32,9 +33,9 @@ public class TagService {
     }
 
     public Set<Tag> getAll() {
-        return repository.findByUser(userService.getCurrentUser())
+        return repository.findByUserOrderByNameAsc(userService.getCurrentUser())
                 .stream()
                 .map(toApi)
-                .collect(toSet());
+                .collect(toCollection(LinkedHashSet::new));
     }
 }
