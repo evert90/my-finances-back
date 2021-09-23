@@ -6,9 +6,11 @@ import br.com.erp.api.financialrecord.FinancialRecordType;
 import br.com.erp.converter.financialrecord.FinancialRecordEntityToFinanacialRecord;
 import br.com.erp.converter.financialrecord.FinancialRecordToFinancialRecordEntity;
 import br.com.erp.repository.FinancialRecordRepository;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -62,5 +64,14 @@ public class FinancialRecordService {
                 .stream()
                 .map(toApi)
                 .collect(toCollection(LinkedHashSet::new));
+    }
+
+    @Transactional
+    public void delete(Long id) throws NotFoundException {
+        var entity = repository.findByUserAndId(userService.getCurrentUser(), id)
+                .orElseThrow(() -> new NotFoundException("Registro não encontrado"));
+
+        entity.getTags().clear();
+        repository.delete(entity);
     }
 }
