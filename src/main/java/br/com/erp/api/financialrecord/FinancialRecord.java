@@ -1,4 +1,6 @@
-package br.com.erp.api;
+package br.com.erp.api.financialrecord;
+
+import br.com.erp.api.Tag;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
