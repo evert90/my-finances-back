@@ -1,6 +1,6 @@
 package br.com.erp.converter.financialrecord;
 
-import br.com.erp.api.FinancialRecord;
+import br.com.erp.api.financialrecord.FinancialRecord;
 import br.com.erp.api.Tag;
 import br.com.erp.entity.FinancialRecordEntity;
 import org.springframework.stereotype.Service;

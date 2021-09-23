@@ -1,6 +1,6 @@
 package br.com.erp.converter.financialrecord;
 
-import br.com.erp.api.FinancialRecord;
+import br.com.erp.api.financialrecord.FinancialRecord;
 import br.com.erp.api.Tag;
 import br.com.erp.entity.FinancialRecordEntity;
 import br.com.erp.entity.TagEntity;
@@ -11,15 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
-import static java.util.Objects.*;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.*;
-import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
 @Service
