@@ -3,6 +3,7 @@ package br.com.erp.controller;
 import br.com.erp.api.financialrecord.FinancialRecord;
 import br.com.erp.api.financialrecord.FinancialRecordTotal;
 import br.com.erp.service.FinancialRecordService;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,6 +52,12 @@ public class FinancialRecordController {
     @GetMapping("/")
     Set<FinancialRecord> getAll() {
         return service.getAll();
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping("/{id}")
+    void delete(@PathVariable(name = "id") Long id) throws NotFoundException {
+        service.delete(id);
     }
 
 }

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface FinancialRecordRepository extends JpaRepository<FinancialRecordEntity, Long> {
@@ -30,4 +31,6 @@ public interface FinancialRecordRepository extends JpaRepository<FinancialRecord
             "AND f.date BETWEEN :start AND :end " +
             "GROUP BY f.type")
     Set<FinancialRecordTotal> getTotalReportByPeriod(LocalDate start, LocalDate end, UserEntity user);
+
+    Optional<FinancialRecordEntity> findByUserAndId(UserEntity user, Long id);
 }
