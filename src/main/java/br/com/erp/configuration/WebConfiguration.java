@@ -14,7 +14,7 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .allowedOrigins(
                         "http://localhost:3000",
                         "https://erp-front-evert90.vercel.app",
-                        "https://erp-front-492rjv11a-evert90.vercel.app")
+                        "https://erp-front-acb48aa4m-evert90.vercel.app")
                 .allowCredentials(true);
     }
 }

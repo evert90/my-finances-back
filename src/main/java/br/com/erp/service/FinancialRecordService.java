@@ -1,13 +1,15 @@
 package br.com.erp.service;
 
-import br.com.erp.api.FinancialRecord;
-import br.com.erp.api.FinancialRecordType;
+import br.com.erp.api.financialrecord.FinancialRecord;
+import br.com.erp.api.financialrecord.FinancialRecordTotal;
+import br.com.erp.api.financialrecord.FinancialRecordType;
 import br.com.erp.converter.financialrecord.FinancialRecordEntityToFinanacialRecord;
 import br.com.erp.converter.financialrecord.FinancialRecordToFinancialRecordEntity;
 import br.com.erp.repository.FinancialRecordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -38,6 +40,21 @@ public class FinancialRecordService {
                 .stream()
                 .map(toApi)
                 .collect(toSet());
+    }
+
+    public Set<FinancialRecord> getByPeriod(LocalDate start, LocalDate end) {
+        return repository.findByUserAndDateBetweenOrderByDateDesc(userService.getCurrentUser(), start, end)
+                .stream()
+                .map(toApi)
+                .collect(toCollection(LinkedHashSet::new));
+    }
+
+    public Set<FinancialRecordTotal> getTotal() {
+        return repository.getTotalReport(userService.getCurrentUser());
+    }
+
+    public Set<FinancialRecordTotal> getTotalByPeriod(LocalDate start, LocalDate end) {
+        return repository.getTotalReportByPeriod(start, end, userService.getCurrentUser());
     }
 
     public Set<FinancialRecord> getAll() {

@@ -1,13 +1,12 @@
 package br.com.erp.entity;
 
-import br.com.erp.api.FinancialRecordType;
+import br.com.erp.api.financialrecord.FinancialRecordType;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.TABLE;
 
