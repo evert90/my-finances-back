@@ -1,8 +1,11 @@
 package br.com.erp.service;
 
+import br.com.erp.api.Tag;
+import br.com.erp.api.TagTotal;
 import br.com.erp.api.financialrecord.FinancialRecord;
 import br.com.erp.api.financialrecord.FinancialRecordTotal;
 import br.com.erp.api.financialrecord.FinancialRecordType;
+import br.com.erp.converter.TagTotalRepositoryToTagTotal;
 import br.com.erp.converter.financialrecord.FinancialRecordEntityToFinanacialRecord;
 import br.com.erp.converter.financialrecord.FinancialRecordToFinancialRecordEntity;
 import br.com.erp.repository.FinancialRecordRepository;
@@ -14,8 +17,10 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.*;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toSet;
 
@@ -27,6 +32,8 @@ public class FinancialRecordService {
     private final FinancialRecordToFinancialRecordEntity toEntity;
 
     private final FinancialRecordEntityToFinanacialRecord toApi;
+
+    private final TagTotalRepositoryToTagTotal toTagTotal;
 
     private final UserService userService;
 
@@ -57,6 +64,18 @@ public class FinancialRecordService {
 
     public Set<FinancialRecordTotal> getTotalByPeriod(LocalDate start, LocalDate end) {
         return repository.getTotalReportByPeriod(start, end, userService.getCurrentUser());
+    }
+
+    public Set<TagTotal> getTotalByPeriodAndTags(LocalDate start, LocalDate end, Set<Long> tagIds) {
+        return repository.getTotalReportByPeriodAndTagIds(
+                    start,
+                    end,
+                    userService.getCurrentUser().getId(),
+                    tagIds
+                )
+                .stream()
+                .map(toTagTotal)
+                .collect(toSet());
     }
 
     public Set<FinancialRecord> getAll() {
