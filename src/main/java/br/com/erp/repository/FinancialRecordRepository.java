@@ -1,5 +1,6 @@
 package br.com.erp.repository;
 
+import br.com.erp.api.TagTotalDTO;
 import br.com.erp.api.financialrecord.FinancialRecordTotal;
 import br.com.erp.api.financialrecord.FinancialRecordType;
 import br.com.erp.entity.FinancialRecordEntity;
@@ -31,6 +32,9 @@ public interface FinancialRecordRepository extends JpaRepository<FinancialRecord
             "AND f.date BETWEEN :start AND :end " +
             "GROUP BY f.type")
     Set<FinancialRecordTotal> getTotalReportByPeriod(LocalDate start, LocalDate end, UserEntity user);
+
+    @Query(nativeQuery = true)
+    Set<TagTotalDTO> getTotalReportByPeriodAndTagIds(LocalDate start, LocalDate end, Long userId, Set<Long> tagIds);
 
     Optional<FinancialRecordEntity> findByUserAndId(UserEntity user, Long id);
 }
