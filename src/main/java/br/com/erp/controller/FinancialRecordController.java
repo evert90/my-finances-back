@@ -1,5 +1,6 @@
 package br.com.erp.controller;
 
+import br.com.erp.api.TagTotal;
 import br.com.erp.api.financialrecord.FinancialRecord;
 import br.com.erp.api.financialrecord.FinancialRecordTotal;
 import br.com.erp.service.FinancialRecordService;
@@ -46,6 +47,15 @@ public class FinancialRecordController {
             @RequestParam(value = "start") @DateTimeFormat(iso = DATE) LocalDate start,
             @RequestParam(value = "end") @DateTimeFormat(iso = DATE) LocalDate end) {
         return service.getTotalByPeriod(start, end);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/report/total/period/tag")
+    Set<TagTotal> getTotalByPeriodAndTags(
+            @RequestParam(value = "start") @DateTimeFormat(iso = DATE) LocalDate start,
+            @RequestParam(value = "end") @DateTimeFormat(iso = DATE) LocalDate end,
+            @RequestParam(value = "tagIds") Set<Long> tagIds) {
+        return service.getTotalByPeriodAndTags(start, end, tagIds);
     }
 
     @PreAuthorize("hasRole('USER')")
