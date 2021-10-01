@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 @Entity
 public class UserEntity {
 
