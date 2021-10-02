@@ -1,6 +1,5 @@
 package br.com.erp.entity;
 
-import br.com.erp.api.TagTotal;
 import br.com.erp.api.TagTotalDTO;
 import br.com.erp.api.financialrecord.FinancialRecordType;
 import lombok.*;

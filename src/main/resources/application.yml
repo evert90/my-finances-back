@@ -1,14 +1,9 @@
-#JPA/MYSQL
+#JPA
 spring:
-  flyway:
-    enabled: false
   jpa:
     show-sql: false
-    hibernate:
-      ddl-auto: create
 
 #AUTH
 app:
   auth:
-    jwtSecret: secretKey
     jwtExpirationMs: 604800000
