@@ -12,6 +12,7 @@ import br.com.erp.service.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import static java.util.Optional.ofNullable;
@@ -27,6 +28,8 @@ public class UserService {
     private final UserToUserEntity userToUserEntity;
 
     private final UserReadOnlyToAuthenticatedUser userReadOnlyToAuthenticatedUser;
+
+    private final PasswordEncoder passwordEncoder;
 
     public AuthenticatedUser authenticate(User user) {
         return ofNullable(get(user))
@@ -46,9 +49,9 @@ public class UserService {
     }
 
     private UserReadOnly get(User user) {
-        return ofNullable(repository.findByEmailAndPassword(user.email(), user.password()))
+        return ofNullable(findAndValidate(user))
                 .map(userEntityToUserReadOnly)
-                .orElseThrow(() -> new RuntimeException("Credenciais inválidas"));
+                .orElseThrow(() -> new RuntimeException("Usuário e/ou senha inválidos"));
     }
 
     private UserReadOnly save(User user) {
@@ -58,5 +61,11 @@ public class UserService {
         return userEntityToUserReadOnly.apply(entity);
     }
 
+    private UserEntity findAndValidate(User user) {
+        var entity = repository.findByEmail(user.email());
+        return entity != null && passwordEncoder.matches(user.password(), entity.getPassword()) ?
+               entity :
+               null;
+    }
 
 }
