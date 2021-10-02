@@ -9,8 +9,7 @@ version = '0.0.1'
 sourceCompatibility = '16'
 
 jar {
-	enabled = true
-	archiveClassifier = "" //use empty string
+	enabled = false
 }
 
 configurations {
