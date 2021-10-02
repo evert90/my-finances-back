@@ -7,7 +7,7 @@ CREATE TABLE financial_record(
     type VARCHAR(30) NOT NULL,
     user_id BIGINT(20) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE financial_record_tags(
