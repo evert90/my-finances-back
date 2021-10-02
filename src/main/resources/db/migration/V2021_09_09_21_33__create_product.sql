@@ -4,7 +4,7 @@ CREATE TABLE product(
     details TEXT NULL,
     user_id BIGINT(20) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE product_categories(
