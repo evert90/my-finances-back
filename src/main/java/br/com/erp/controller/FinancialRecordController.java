@@ -2,9 +2,9 @@ package br.com.erp.controller;
 
 import br.com.erp.api.TagTotal;
 import br.com.erp.api.financialrecord.FinancialRecord;
+import br.com.erp.api.financialrecord.FinancialRecordReadonly;
 import br.com.erp.api.financialrecord.FinancialRecordTotal;
 import br.com.erp.service.FinancialRecordService;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,13 +24,13 @@ public class FinancialRecordController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/")
-    FinancialRecord save(@RequestBody FinancialRecord financialRecord) {
+    FinancialRecordReadonly save(@RequestBody FinancialRecord financialRecord) {
         return service.save(financialRecord);
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/search")
-    Set<FinancialRecord> getByPeriod(@RequestParam(value = "start") @DateTimeFormat(iso = DATE) LocalDate start,
+    Set<FinancialRecordReadonly> getByPeriod(@RequestParam(value = "start") @DateTimeFormat(iso = DATE) LocalDate start,
                                    @RequestParam(value = "end") @DateTimeFormat(iso = DATE) LocalDate end) {
         return service.getByPeriod(start, end);
     }
@@ -60,13 +60,13 @@ public class FinancialRecordController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/")
-    Set<FinancialRecord> getAll() {
+    Set<FinancialRecordReadonly> getAll() {
         return service.getAll();
     }
 
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/{id}")
-    void delete(@PathVariable(name = "id") Long id) throws NotFoundException {
+    void delete(@PathVariable(name = "id") Long id) {
         service.delete(id);
     }
 
