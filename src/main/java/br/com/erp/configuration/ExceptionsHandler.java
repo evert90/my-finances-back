@@ -1,8 +1,7 @@
 package br.com.erp.configuration;
 
 import br.com.erp.api.ErrorMessage;
-
-import javassist.NotFoundException;
+import br.com.erp.exception.NotFoundException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,7 +12,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
-public class ExcpetionHandler {
+public class ExceptionsHandler {
 
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(RuntimeException.class)

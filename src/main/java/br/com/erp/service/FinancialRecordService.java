@@ -1,15 +1,15 @@
 package br.com.erp.service;
 
-import br.com.erp.api.Tag;
 import br.com.erp.api.TagTotal;
 import br.com.erp.api.financialrecord.FinancialRecord;
+import br.com.erp.api.financialrecord.FinancialRecordReadonly;
 import br.com.erp.api.financialrecord.FinancialRecordTotal;
 import br.com.erp.api.financialrecord.FinancialRecordType;
 import br.com.erp.converter.TagTotalRepositoryToTagTotal;
-import br.com.erp.converter.financialrecord.FinancialRecordEntityToFinanacialRecord;
+import br.com.erp.converter.financialrecord.FinancialRecordEntityToFinanacialRecordReadonly;
 import br.com.erp.converter.financialrecord.FinancialRecordToFinancialRecordEntity;
+import br.com.erp.exception.NotFoundException;
 import br.com.erp.repository.FinancialRecordRepository;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +17,8 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.*;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toSet;
 
@@ -31,27 +29,27 @@ public class FinancialRecordService {
 
     private final FinancialRecordToFinancialRecordEntity toEntity;
 
-    private final FinancialRecordEntityToFinanacialRecord toApi;
+    private final FinancialRecordEntityToFinanacialRecordReadonly toApi;
 
     private final TagTotalRepositoryToTagTotal toTagTotal;
 
     private final UserService userService;
 
-    public FinancialRecord save(FinancialRecord financialRecord) {
+    public FinancialRecordReadonly save(FinancialRecord financialRecord) {
         return ofNullable(financialRecord)
                 .map(it -> repository.save(toEntity.apply(it)))
                 .map(toApi)
                 .orElseThrow(() -> new RuntimeException("Erro ao salvar/retornar o registro financeiro"));
     }
 
-    public Set<FinancialRecord> getByType(FinancialRecordType type) {
+    public Set<FinancialRecordReadonly> getByType(FinancialRecordType type) {
         return repository.findByType(type)
                 .stream()
                 .map(toApi)
                 .collect(toSet());
     }
 
-    public Set<FinancialRecord> getByPeriod(LocalDate start, LocalDate end) {
+    public Set<FinancialRecordReadonly> getByPeriod(LocalDate start, LocalDate end) {
         return repository.findByUserAndDateBetweenOrderByDateDesc(userService.getCurrentUser(), start, end)
                 .stream()
                 .map(toApi)
@@ -78,7 +76,7 @@ public class FinancialRecordService {
                 .collect(toSet());
     }
 
-    public Set<FinancialRecord> getAll() {
+    public Set<FinancialRecordReadonly> getAll() {
         return repository.findByUserOrderByDateDesc(userService.getCurrentUser())
                 .stream()
                 .map(toApi)
@@ -86,7 +84,7 @@ public class FinancialRecordService {
     }
 
     @Transactional
-    public void delete(Long id) throws NotFoundException {
+    public void delete(Long id) {
         var entity = repository.findByUserAndId(userService.getCurrentUser(), id)
                 .orElseThrow(() -> new NotFoundException("Registro não encontrado"));
 

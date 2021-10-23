@@ -2,7 +2,7 @@ package br.com.erp.service;
 
 import br.com.erp.api.user.AuthenticatedUser;
 import br.com.erp.api.user.User;
-import br.com.erp.api.user.UserReadOnly;
+import br.com.erp.api.user.UserReadonly;
 import br.com.erp.converter.user.UserEntityToUserReadOnly;
 import br.com.erp.converter.user.UserReadOnlyToAuthenticatedUser;
 import br.com.erp.converter.user.UserToUserEntity;
@@ -48,13 +48,13 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário inválido ou não encontrado"));
     }
 
-    private UserReadOnly get(User user) {
+    private UserReadonly get(User user) {
         return ofNullable(findAndValidate(user))
                 .map(userEntityToUserReadOnly)
                 .orElseThrow(() -> new RuntimeException("Usuário e/ou senha inválidos"));
     }
 
-    private UserReadOnly save(User user) {
+    private UserReadonly save(User user) {
         var entity = userToUserEntity.apply(user);
         entity = repository.save(entity);
 
