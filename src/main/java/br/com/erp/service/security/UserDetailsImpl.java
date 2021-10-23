@@ -1,6 +1,6 @@
 package br.com.erp.service.security;
 
-import br.com.erp.api.user.UserReadOnly;
+import br.com.erp.api.user.UserReadonly;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,7 +36,7 @@ public class UserDetailsImpl implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	public static UserDetailsImpl build(UserReadOnly user) {
+	public static UserDetailsImpl build(UserReadonly user) {
 		List<GrantedAuthority> authorities = user.roles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.name()))
 				.collect(Collectors.toList());

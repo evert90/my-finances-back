@@ -4,9 +4,10 @@ import br.com.erp.api.Tag;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public record FinancialRecord(
+public record FinancialRecordReadonly(
         Long id,
         String name,
         String details,
@@ -14,5 +15,7 @@ public record FinancialRecord(
         LocalDate date,
         FinancialRecordType type,
         List<Tag> tags,
-        Boolean paid
+        Boolean paid,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) { }
