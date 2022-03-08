@@ -37,6 +37,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new AuthTokenFilter();
     }
 
+    @Bean
+    public CorsPreflightFilter corsPreflightFilter() {
+        return new CorsPreflightFilter();
+    }
+
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -53,26 +58,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    //OVERRIDE DEFAULT CORSFILTER E CORSPROCESSOR UTILIZADO PELO SPRING SECURITY AO UTILIZAR http.cors() (CORSFILTER > DEFAULTCORSPROCESSOR)
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:3000",
-                "https://erp-front-evert90.vercel.app",
-                "https://erp-front-three.vercel.app")
-        );
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-        configuration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-
-        var corsFilter = new CorsFilter(source);
-        corsFilter.setCorsProcessor(new CorsProcessorCustom());
-        return corsFilter;
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
@@ -83,6 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(corsPreflightFilter(), CorsFilter.class);
     }
 
 }
