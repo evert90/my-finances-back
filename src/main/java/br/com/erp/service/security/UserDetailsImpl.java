@@ -1,6 +1,6 @@
 package br.com.erp.service.security;
 
-import br.com.erp.api.user.UserReadonly;
+import br.com.erp.bean.user.UserReadonly;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

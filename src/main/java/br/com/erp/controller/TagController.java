@@ -1,9 +1,7 @@
 package br.com.erp.controller;
 
-import br.com.erp.api.Tag;
-import br.com.erp.api.product.ProductCategory;
+import br.com.erp.bean.tag.Tag;
 import br.com.erp.service.TagService;
-import br.com.erp.service.product.ProductCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

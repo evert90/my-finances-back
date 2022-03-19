@@ -1,6 +1,6 @@
 package br.com.erp.controller.product;
 
-import br.com.erp.api.product.ProductCategory;
+import br.com.erp.bean.product.ProductCategory;
 import br.com.erp.service.product.ProductCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

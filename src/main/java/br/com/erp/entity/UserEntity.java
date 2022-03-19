@@ -1,6 +1,6 @@
 package br.com.erp.entity;
 
-import br.com.erp.api.Role;
+import br.com.erp.bean.user.Role;
 import br.com.erp.entity.product.ProductCategoryEntity;
 import br.com.erp.entity.product.ProductEntity;
 import lombok.*;
@@ -12,6 +12,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.*;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})

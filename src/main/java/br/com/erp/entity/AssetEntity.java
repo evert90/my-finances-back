@@ -1,8 +1,8 @@
 package br.com.erp.entity;
 
-import br.com.erp.api.asset.AssetType;
-import br.com.erp.api.asset.AssetRendaFixaRateType;
-import br.com.erp.api.asset.AssetRendaFixaType;
+import br.com.erp.bean.asset.AssetType;
+import br.com.erp.bean.asset.AssetRendaFixaRateType;
+import br.com.erp.bean.asset.AssetRendaFixaType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,6 +14,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.TABLE;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "asset")

@@ -1,7 +1,7 @@
 package br.com.erp.converter.asset;
 
-import br.com.erp.api.Tag;
-import br.com.erp.api.asset.AssetReadonly;
+import br.com.erp.bean.tag.Tag;
+import br.com.erp.bean.asset.AssetReadonly;
 import br.com.erp.entity.AssetEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,27 +17,28 @@ import static java.util.stream.Collectors.toList;
 public class AssetEntityToAssetReadonly implements Function<AssetEntity, AssetReadonly> {
     @Override
     public AssetReadonly apply(AssetEntity entity) {
-        return new AssetReadonly(
-                entity.getId(),
-                entity.getName(),
-                entity.getDetails(),
-                entity.getInitialValue(),
-                entity.getEndValue(),
-                entity.getInitialDate(),
-                entity.getEndDate(),
-                entity.getType(),
-                entity.getRendaFixaType(),
-                entity.getRendaFixaRateType(),
-                entity.getBank(),
-                entity.getRate(),
-                entity.getLiquidez(),
-                ofNullable(entity.getTags())
+        return AssetReadonly
+                .builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .details(entity.getDetails())
+                .initialValue(entity.getInitialValue())
+                .endValue(entity.getEndValue())
+                .initialDate(entity.getInitialDate())
+                .endDate(entity.getEndDate())
+                .type(entity.getType())
+                .rendaFixaType(entity.getRendaFixaType())
+                .rendaFixaRateType(entity.getRendaFixaRateType())
+                .bank(entity.getBank())
+                .rate(entity.getRate())
+                .liquidez(entity.getLiquidez())
+                .tags(ofNullable(entity.getTags())
                         .orElseGet(Collections::emptyList)
                         .stream()
-                        .map(it -> new Tag(it.getId(), it.getName()))
-                        .collect(toList()),
-                entity.getCreatedAt(),
-                entity.getUpdatedAt()
-        );
+                        .map(tag -> new Tag(tag.getId(), tag.getName()))
+                        .collect(toList()))
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .build();
     }
 }

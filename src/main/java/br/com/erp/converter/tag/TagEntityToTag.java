@@ -1,6 +1,6 @@
 package br.com.erp.converter.tag;
 
-import br.com.erp.api.Tag;
+import br.com.erp.bean.tag.Tag;
 import br.com.erp.entity.TagEntity;
 import org.springframework.stereotype.Service;
 

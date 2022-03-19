@@ -1,4 +1,4 @@
-package br.com.erp.api;
+package br.com.erp.bean.tag;
 
 import java.math.BigDecimal;
 

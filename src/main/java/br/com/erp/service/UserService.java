@@ -1,8 +1,8 @@
 package br.com.erp.service;
 
-import br.com.erp.api.user.AuthenticatedUser;
-import br.com.erp.api.user.User;
-import br.com.erp.api.user.UserReadonly;
+import br.com.erp.bean.user.AuthenticatedUser;
+import br.com.erp.bean.user.User;
+import br.com.erp.bean.user.UserReadonly;
 import br.com.erp.converter.user.UserEntityToUserReadOnly;
 import br.com.erp.converter.user.UserReadOnlyToAuthenticatedUser;
 import br.com.erp.converter.user.UserToUserEntity;
@@ -55,10 +55,11 @@ public class UserService {
     }
 
     private UserReadonly save(User user) {
-        var entity = userToUserEntity.apply(user);
-        entity = repository.save(entity);
-
-        return userEntityToUserReadOnly.apply(entity);
+        return ofNullable(user)
+                .map(userToUserEntity)
+                .map(repository::save)
+                .map(userEntityToUserReadOnly)
+                .orElseThrow(() -> new RuntimeException("Erro ao salvar/retornar o usuário"));
     }
 
     private UserEntity findAndValidate(User user) {

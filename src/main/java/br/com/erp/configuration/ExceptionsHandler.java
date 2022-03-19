@@ -1,6 +1,6 @@
 package br.com.erp.configuration;
 
-import br.com.erp.api.ErrorMessage;
+import br.com.erp.bean.ErrorMessage;
 import br.com.erp.exception.NotFoundException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
