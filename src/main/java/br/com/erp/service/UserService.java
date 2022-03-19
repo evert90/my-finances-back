@@ -55,10 +55,11 @@ public class UserService {
     }
 
     private UserReadonly save(User user) {
-        var entity = userToUserEntity.apply(user);
-        entity = repository.save(entity);
-
-        return userEntityToUserReadOnly.apply(entity);
+        return ofNullable(user)
+                .map(userToUserEntity)
+                .map(repository::save)
+                .map(userEntityToUserReadOnly)
+                .orElseThrow(() -> new RuntimeException("Erro ao salvar/retornar o usuário"));
     }
 
     private UserEntity findAndValidate(User user) {
