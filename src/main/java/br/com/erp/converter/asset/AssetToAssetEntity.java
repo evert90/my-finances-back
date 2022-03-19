@@ -1,7 +1,7 @@
 package br.com.erp.converter.asset;
 
-import br.com.erp.api.Tag;
-import br.com.erp.api.asset.Asset;
+import br.com.erp.bean.tag.Tag;
+import br.com.erp.bean.asset.Asset;
 import br.com.erp.entity.AssetEntity;
 import br.com.erp.entity.TagEntity;
 import br.com.erp.entity.UserEntity;
@@ -34,31 +34,31 @@ public class AssetToAssetEntity implements Function<Asset, AssetEntity> {
     public AssetEntity apply(Asset asset) {
         var user = userService.getCurrentUser();
 
-        return new AssetEntity(
-                asset.id(),
-                asset.name(),
-                asset.details(),
-                asset.initialValue(),
-                asset.endValue(),
-                asset.initialDate(),
-                asset.endDate(),
-                asset.type(),
-                asset.rendaFixaType(),
-                asset.rendaFixaRateType(),
-                asset.bank(),
-                asset.rate(),
-                asset.liquidez(),
-                ofNullable(asset.tags())
+        return AssetEntity
+                .builder()
+                .id(asset.id())
+                .name(asset.name())
+                .details(asset.details())
+                .initialValue(asset.initialValue())
+                .endValue(asset.endValue())
+                .initialDate(asset.initialDate())
+                .endDate(asset.endDate())
+                .type(asset.type())
+                .rendaFixaType(asset.rendaFixaType())
+                .rendaFixaRateType(asset.rendaFixaRateType())
+                .bank(asset.bank())
+                .rate(asset.rate())
+                .liquidez(asset.liquidez())
+                .tags(ofNullable(asset.tags())
                         .orElseGet(Collections::emptyList)
                         .stream()
-                        .map(it ->
-                                tagRepository.findByUserAndName(user, it.name())
+                        .map(it -> tagRepository.findByUserAndName(user, it.name())
                                         .orElseGet(() -> saveTag(it, user)))
-                        .collect(toList()),
-                user,
-                getCreatedAt(asset.id(), user),
-                now()
-        );
+                        .collect(toList()))
+                .user(user)
+                .createdAt(getCreatedAt(asset.id(), user))
+                .updatedAt(now())
+                .build();
     }
 
     private TagEntity saveTag(Tag tag, UserEntity user) {

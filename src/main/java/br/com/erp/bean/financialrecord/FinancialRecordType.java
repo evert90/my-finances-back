@@ -1,4 +1,4 @@
-package br.com.erp.api.financialrecord;
+package br.com.erp.bean.financialrecord;
 
 public enum FinancialRecordType {
     INCOME,

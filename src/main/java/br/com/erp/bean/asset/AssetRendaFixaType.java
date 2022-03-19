@@ -1,4 +1,4 @@
-package br.com.erp.api.asset;
+package br.com.erp.bean.asset;
 
 public enum AssetRendaFixaType {
     CDB,

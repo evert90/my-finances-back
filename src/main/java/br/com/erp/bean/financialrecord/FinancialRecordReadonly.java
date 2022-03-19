@@ -1,6 +1,7 @@
-package br.com.erp.api.financialrecord;
+package br.com.erp.bean.financialrecord;
 
-import br.com.erp.api.Tag;
+import br.com.erp.bean.tag.Tag;
+import lombok.Builder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,4 +19,7 @@ public record FinancialRecordReadonly(
         Boolean paid,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
-) { }
+) {
+    @Builder
+    public FinancialRecordReadonly {}
+}

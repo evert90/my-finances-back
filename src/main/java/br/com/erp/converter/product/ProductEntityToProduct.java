@@ -1,6 +1,6 @@
 package br.com.erp.converter.product;
 
-import br.com.erp.api.product.Product;
+import br.com.erp.bean.product.Product;
 import br.com.erp.entity.product.ProductCategoryEntity;
 import br.com.erp.entity.product.ProductEntity;
 import org.springframework.stereotype.Service;

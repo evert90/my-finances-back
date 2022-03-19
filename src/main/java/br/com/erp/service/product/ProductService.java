@@ -1,6 +1,6 @@
 package br.com.erp.service.product;
 
-import br.com.erp.api.product.Product;
+import br.com.erp.bean.product.Product;
 import br.com.erp.converter.product.ProductEntityToProduct;
 import br.com.erp.converter.product.ProductToProductEntity;
 import br.com.erp.repository.product.ProductRepository;

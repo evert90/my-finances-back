@@ -1,7 +1,7 @@
 package br.com.erp.controller;
 
-import br.com.erp.api.user.AuthenticatedUser;
-import br.com.erp.api.user.User;
+import br.com.erp.bean.user.AuthenticatedUser;
+import br.com.erp.bean.user.User;
 import br.com.erp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

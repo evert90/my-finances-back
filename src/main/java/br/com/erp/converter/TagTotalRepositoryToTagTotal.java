@@ -1,8 +1,8 @@
 package br.com.erp.converter;
 
-import br.com.erp.api.Tag;
-import br.com.erp.api.TagTotal;
-import br.com.erp.api.TagTotalDTO;
+import br.com.erp.bean.tag.Tag;
+import br.com.erp.bean.tag.TagTotal;
+import br.com.erp.bean.tag.TagTotalDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
