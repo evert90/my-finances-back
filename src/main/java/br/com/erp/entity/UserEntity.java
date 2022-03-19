@@ -41,6 +41,7 @@ public class UserEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private Role role = Role.ROLE_USER;
 
     @EqualsAndHashCode.Exclude
