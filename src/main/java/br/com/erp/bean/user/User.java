@@ -1,6 +1,4 @@
-package br.com.erp.api.user;
-
-import br.com.erp.api.Role;
+package br.com.erp.bean.user;
 
 import java.util.Set;
 

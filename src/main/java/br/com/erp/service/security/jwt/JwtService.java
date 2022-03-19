@@ -1,6 +1,6 @@
 package br.com.erp.service.security.jwt;
 
-import br.com.erp.api.user.UserReadonly;
+import br.com.erp.bean.user.UserReadonly;
 import br.com.erp.service.security.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;

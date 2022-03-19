@@ -1,6 +1,6 @@
 package br.com.erp.converter.product;
 
-import br.com.erp.api.product.ProductCategory;
+import br.com.erp.bean.product.ProductCategory;
 import br.com.erp.entity.product.ProductCategoryEntity;
 import br.com.erp.service.UserService;
 import lombok.RequiredArgsConstructor;

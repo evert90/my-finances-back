@@ -1,4 +1,4 @@
-package br.com.erp.api;
+package br.com.erp.bean.user;
 
 public enum Role {
     ROLE_USER,

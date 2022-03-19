@@ -1,8 +1,8 @@
 package br.com.erp.service;
 
-import br.com.erp.api.user.AuthenticatedUser;
-import br.com.erp.api.user.User;
-import br.com.erp.api.user.UserReadonly;
+import br.com.erp.bean.user.AuthenticatedUser;
+import br.com.erp.bean.user.User;
+import br.com.erp.bean.user.UserReadonly;
 import br.com.erp.converter.user.UserEntityToUserReadOnly;
 import br.com.erp.converter.user.UserReadOnlyToAuthenticatedUser;
 import br.com.erp.converter.user.UserToUserEntity;

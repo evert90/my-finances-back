@@ -1,10 +1,10 @@
 package br.com.erp.service;
 
-import br.com.erp.api.TagTotal;
-import br.com.erp.api.financialrecord.FinancialRecord;
-import br.com.erp.api.financialrecord.FinancialRecordReadonly;
-import br.com.erp.api.financialrecord.FinancialRecordTotal;
-import br.com.erp.api.financialrecord.FinancialRecordType;
+import br.com.erp.bean.tag.TagTotal;
+import br.com.erp.bean.financialrecord.FinancialRecord;
+import br.com.erp.bean.financialrecord.FinancialRecordReadonly;
+import br.com.erp.bean.financialrecord.FinancialRecordTotal;
+import br.com.erp.bean.financialrecord.FinancialRecordType;
 import br.com.erp.converter.TagTotalRepositoryToTagTotal;
 import br.com.erp.converter.financialrecord.FinancialRecordEntityToFinanacialRecordReadonly;
 import br.com.erp.converter.financialrecord.FinancialRecordToFinancialRecordEntity;
@@ -37,7 +37,8 @@ public class FinancialRecordService {
 
     public FinancialRecordReadonly save(FinancialRecord financialRecord) {
         return ofNullable(financialRecord)
-                .map(it -> repository.save(toEntity.apply(it)))
+                .map(toEntity)
+                .map(repository::save)
                 .map(toApi)
                 .orElseThrow(() -> new RuntimeException("Erro ao salvar/retornar o registro financeiro"));
     }

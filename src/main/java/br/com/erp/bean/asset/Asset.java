@@ -1,13 +1,12 @@
-package br.com.erp.api.asset;
+package br.com.erp.bean.asset;
 
-import br.com.erp.api.Tag;
+import br.com.erp.bean.tag.Tag;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
-public record AssetReadonly (
+public record Asset (
     Long id,
     String name,
     String details,
@@ -21,7 +20,5 @@ public record AssetReadonly (
     String bank,
     BigDecimal rate,
     Boolean liquidez,
-    List<Tag> tags,
-    LocalDateTime createdAt,
-    LocalDateTime updatedAt
-) {}
+    List<Tag> tags
+) { }

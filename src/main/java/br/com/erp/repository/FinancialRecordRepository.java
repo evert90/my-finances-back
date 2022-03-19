@@ -1,8 +1,8 @@
 package br.com.erp.repository;
 
-import br.com.erp.api.TagTotalDTO;
-import br.com.erp.api.financialrecord.FinancialRecordTotal;
-import br.com.erp.api.financialrecord.FinancialRecordType;
+import br.com.erp.bean.tag.TagTotalDTO;
+import br.com.erp.bean.financialrecord.FinancialRecordTotal;
+import br.com.erp.bean.financialrecord.FinancialRecordType;
 import br.com.erp.entity.FinancialRecordEntity;
 import br.com.erp.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,13 +20,13 @@ public interface FinancialRecordRepository extends JpaRepository<FinancialRecord
 
     Set<FinancialRecordEntity> findByUserAndDateBetweenOrderByDateDesc(UserEntity user, LocalDate start, LocalDate end);
 
-    @Query("SELECT new br.com.erp.api.financialrecord.FinancialRecordTotal(f.type, sum(f.value)) " +
+    @Query("SELECT new br.com.erp.bean.financialrecord.FinancialRecordTotal(f.type, sum(f.value)) " +
             "FROM FinancialRecordEntity f " +
             "WHERE f.user = :user " +
             "GROUP BY f.type")
     Set<FinancialRecordTotal> getTotalReport(UserEntity user);
 
-    @Query("SELECT new br.com.erp.api.financialrecord.FinancialRecordTotal(f.type, sum(f.value)) " +
+    @Query("SELECT new br.com.erp.bean.financialrecord.FinancialRecordTotal(f.type, sum(f.value)) " +
             "FROM FinancialRecordEntity f " +
             "WHERE f.user = :user " +
             "AND f.date BETWEEN :start AND :end " +
