@@ -1,6 +1,6 @@
 # ERP BACK
 
-Projetinho com Java/Spring Boot
+Project with Java/Spring Boot
 
 Config to run using MYSQL:
 
