@@ -1,7 +1,7 @@
 package br.com.erp.entity;
 
-import br.com.erp.api.TagTotalDTO;
-import br.com.erp.api.financialrecord.FinancialRecordType;
+import br.com.erp.bean.tag.TagTotalDTO;
+import br.com.erp.bean.financialrecord.FinancialRecordType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,6 +31,7 @@ import static javax.persistence.GenerationType.TABLE;
         }
 ))
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "financial_record")

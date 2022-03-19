@@ -1,9 +1,9 @@
 package br.com.erp.controller;
 
-import br.com.erp.api.TagTotal;
-import br.com.erp.api.financialrecord.FinancialRecord;
-import br.com.erp.api.financialrecord.FinancialRecordReadonly;
-import br.com.erp.api.financialrecord.FinancialRecordTotal;
+import br.com.erp.bean.tag.TagTotal;
+import br.com.erp.bean.financialrecord.FinancialRecord;
+import br.com.erp.bean.financialrecord.FinancialRecordReadonly;
+import br.com.erp.bean.financialrecord.FinancialRecordTotal;
 import br.com.erp.service.FinancialRecordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;

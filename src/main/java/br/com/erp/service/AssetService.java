@@ -1,7 +1,7 @@
 package br.com.erp.service;
 
-import br.com.erp.api.asset.Asset;
-import br.com.erp.api.asset.AssetReadonly;
+import br.com.erp.bean.asset.Asset;
+import br.com.erp.bean.asset.AssetReadonly;
 import br.com.erp.converter.asset.AssetEntityToAssetReadonly;
 import br.com.erp.converter.asset.AssetToAssetEntity;
 import br.com.erp.exception.NotFoundException;
@@ -29,7 +29,8 @@ public class AssetService {
 
     public AssetReadonly save(Asset asset) {
         return ofNullable(asset)
-                .map(it -> repository.save(toEntity.apply(it)))
+                .map(toEntity)
+                .map(repository::save)
                 .map(toApi)
                 .orElseThrow(() -> new RuntimeException("Erro ao salvar/retornar o bem"));
     }

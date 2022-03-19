@@ -1,4 +1,4 @@
-package br.com.erp.api.product;
+package br.com.erp.bean.product;
 
 import java.util.Set;
 

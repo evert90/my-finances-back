@@ -1,6 +1,6 @@
 package br.com.erp.converter.user;
 
-import br.com.erp.api.user.User;
+import br.com.erp.bean.user.User;
 import br.com.erp.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,10 +16,11 @@ public class UserToUserEntity implements Function<User, UserEntity> {
 
     @Override
     public UserEntity apply(User user) {
-        return new UserEntity(
-                user.name(),
-                user.email(),
-                passwordEncoder.encode(user.password())
-        );
+        return UserEntity
+                .builder()
+                .name(user.name())
+                .email(user.email())
+                .password(passwordEncoder.encode(user.password()))
+                .build();
     }
 }

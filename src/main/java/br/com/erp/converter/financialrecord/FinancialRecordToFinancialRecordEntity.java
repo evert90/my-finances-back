@@ -1,7 +1,7 @@
 package br.com.erp.converter.financialrecord;
 
-import br.com.erp.api.Tag;
-import br.com.erp.api.financialrecord.FinancialRecord;
+import br.com.erp.bean.tag.Tag;
+import br.com.erp.bean.financialrecord.FinancialRecord;
 import br.com.erp.entity.FinancialRecordEntity;
 import br.com.erp.entity.TagEntity;
 import br.com.erp.entity.UserEntity;
@@ -34,25 +34,25 @@ public class FinancialRecordToFinancialRecordEntity implements Function<Financia
     public FinancialRecordEntity apply(FinancialRecord financialRecord) {
         var user = userService.getCurrentUser();
 
-        return new FinancialRecordEntity(
-                financialRecord.id(),
-                financialRecord.name(),
-                financialRecord.details(),
-                financialRecord.value(),
-                financialRecord.type(),
-                financialRecord.date(),
-                ofNullable(financialRecord.tags())
+        return FinancialRecordEntity
+                .builder()
+                .id(financialRecord.id())
+                .name(financialRecord.name())
+                .details(financialRecord.details())
+                .value(financialRecord.value())
+                .type(financialRecord.type())
+                .date(financialRecord.date())
+                .tags(ofNullable(financialRecord.tags())
                         .orElseGet(Collections::emptyList)
                         .stream()
-                        .map(it ->
-                                tagRepository.findByUserAndName(user, it.name())
+                        .map(it -> tagRepository.findByUserAndName(user, it.name())
                                 .orElseGet(() -> saveTag(it, user)))
-                        .collect(toList()),
-                user,
-                financialRecord.paid(),
-                getCreatedAt(financialRecord.id(), user),
-                now()
-        );
+                        .collect(toList()))
+                .user(user)
+                .paid(financialRecord.paid())
+                .createdAt(getCreatedAt(financialRecord.id(), user))
+                .updatedAt(now())
+                .build();
     }
 
     private TagEntity saveTag(Tag tag, UserEntity user) {
