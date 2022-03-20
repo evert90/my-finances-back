@@ -5,6 +5,7 @@ import br.com.erp.bean.financialrecord.FinancialRecord;
 import br.com.erp.bean.financialrecord.FinancialRecordReadonly;
 import br.com.erp.bean.financialrecord.FinancialRecordTotal;
 import br.com.erp.service.FinancialRecordService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +18,7 @@ import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 @RequiredArgsConstructor
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("api/financial-records")
 public class FinancialRecordController {
 

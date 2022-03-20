@@ -3,6 +3,7 @@ package br.com.erp.controller;
 import br.com.erp.bean.asset.Asset;
 import br.com.erp.bean.asset.AssetReadonly;
 import br.com.erp.service.AssetService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("api/assets")
 public class AssetController {
 
