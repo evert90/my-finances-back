@@ -5,7 +5,7 @@ Project with Java/Spring Boot
 Config to run using MYSQL:
 
 SPRING_DATASOURCE_DRIVERCLASSNAME=com.mysql.cj.jdbc.Driver;  
-SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/databaseName?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false;  
+SPRING_DATASOURCE_URL=jdbc:mysql://databaseAddress:port/databaseName
 SPRING_DATASOURCE_USERNAME=user;  
 SPRING_DATASOURCE_PASSWORD=password;  
 SPRING_JPA_HIBERNATE_DDLAUTO=update;  
