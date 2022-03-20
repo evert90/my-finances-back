@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
 group = 'br.com.erp'
@@ -43,3 +44,5 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+apply from: 'jacoco.gradle'
