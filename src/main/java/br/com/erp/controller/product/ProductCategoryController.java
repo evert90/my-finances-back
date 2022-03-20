@@ -2,6 +2,7 @@ package br.com.erp.controller.product;
 
 import br.com.erp.bean.product.ProductCategory;
 import br.com.erp.service.product.ProductCategoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("api/products-category")
 public class ProductCategoryController {
 
