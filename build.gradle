@@ -1,12 +1,12 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.3'
+	id 'org.springframework.boot' version '2.6.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
 
 group = 'br.com.erp'
 version = '1.1.2'
-sourceCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
 
 jar {
 	enabled = false
@@ -37,8 +37,9 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'com.h2database:h2:'
 }
 
-test {
+tasks.named('test') {
 	useJUnitPlatform()
 }
