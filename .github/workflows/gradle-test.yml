@@ -1,4 +1,4 @@
-name: Run Gradle on PRs
+name: Tests
 on: pull_request
 jobs:
   gradle:
@@ -16,4 +16,4 @@ jobs:
       - name: Setup and execute Gradle 'test' task
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: test
+          arguments: test jacocoTestCoverageVerification
