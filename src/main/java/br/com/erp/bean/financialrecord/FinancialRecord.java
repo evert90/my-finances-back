@@ -1,5 +1,6 @@
 package br.com.erp.bean.financialrecord;
 
+import br.com.erp.bean.recurrence.RecurrencePeriod;
 import br.com.erp.bean.tag.Tag;
 
 import java.math.BigDecimal;
@@ -14,5 +15,9 @@ public record FinancialRecord(
         LocalDate date,
         FinancialRecordType type,
         List<Tag> tags,
-        Boolean paid
+        Boolean paid,
+        boolean recurrence,
+        RecurrencePeriod recurrencePeriod,
+        Integer recurrenceQuantity,
+        Boolean recurrenceEmptyValue
 ) { }
