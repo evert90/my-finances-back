@@ -32,9 +32,13 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public AuthenticatedUser authenticate(User user) {
-        return ofNullable(get(user))
+        return ofNullable(user)
+                .map(User::email)
+                .map(repository::findByEmail)
+                .filter(entity -> passwordEncoder.matches(user.password(), entity.getPassword()))
+                .map(userEntityToUserReadOnly)
                 .map(userReadOnlyToAuthenticatedUser)
-                .orElseThrow(() -> new RuntimeException("Erro ao autenticar o usuário"));
+                .orElseThrow(() -> new RuntimeException("Usuário e/ou senha inválidos"));
     }
 
     public AuthenticatedUser saveAndAuthenticate(User user) {
@@ -48,25 +52,12 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário inválido ou não encontrado"));
     }
 
-    private UserReadonly get(User user) {
-        return ofNullable(findAndValidate(user))
-                .map(userEntityToUserReadOnly)
-                .orElseThrow(() -> new RuntimeException("Usuário e/ou senha inválidos"));
-    }
-
     private UserReadonly save(User user) {
         return ofNullable(user)
                 .map(userToUserEntity)
                 .map(repository::save)
                 .map(userEntityToUserReadOnly)
                 .orElseThrow(() -> new RuntimeException("Erro ao salvar/retornar o usuário"));
-    }
-
-    private UserEntity findAndValidate(User user) {
-        var entity = repository.findByEmail(user.email());
-        return entity != null && passwordEncoder.matches(user.password(), entity.getPassword()) ?
-               entity :
-               null;
     }
 
 }
