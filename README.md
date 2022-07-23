@@ -1,8 +1,8 @@
 # ERP BACK
 
-Project with Java/Spring Boot
+Projeto para controle de finanças pessoais com Java/Spring Boot
 
-Config to run using MYSQL:
+Configuração para utilizar MySQL:
 
 SPRING_DATASOURCE_DRIVERCLASSNAME=com.mysql.cj.jdbc.Driver;  
 SPRING_DATASOURCE_URL=jdbc:mysql://databaseAddress:port/databaseName
@@ -14,7 +14,7 @@ APP_AUTH_JWTSECRET=secretKey;
 SERVER_PORT=21200;  
 SERVER_ADDRESS=127.0.0.1;
 
-Config to run using PostgreSQL:
+Configuração para utilizar PostgreSQL:
 
 SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver;  
 SPRING_DATASOURCE_URL=jdbc:postgresql://databaseAddress:port/databaseName  
