@@ -1,8 +1,6 @@
 package br.com.erp.service.security.jwt;
 
 import br.com.erp.service.security.UserDetailsServiceImpl;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

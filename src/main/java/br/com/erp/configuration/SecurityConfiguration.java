@@ -59,9 +59,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.cors().and()
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/users/**", "/swagger/**").permitAll()
-                .anyRequest().authenticated();
+                //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests().antMatchers("/api/users/**", "/login/**","/oauth2/**", "/swagger/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .oauth2Login()
+                .defaultSuccessUrl("/api/users/auth/social/success", true)
+                .failureUrl("/api/users/auth/social/failure");
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(corsPreflightFilter(), CorsFilter.class);

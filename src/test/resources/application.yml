@@ -3,6 +3,7 @@ app:
   auth:
     jwtExpirationMs: 604800000
     jwtSecret: testSecret
+    redirectUrl: fakeUrl/auth/login
 
 spring:
   datasource:
@@ -13,3 +14,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: fakeId
+            clientSecret: fakeSecret
