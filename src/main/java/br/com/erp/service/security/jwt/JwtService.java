@@ -1,17 +1,14 @@
 package br.com.erp.service.security.jwt;
 
 import br.com.erp.bean.user.UserReadonly;
-import br.com.erp.service.security.UserDetailsImpl;
 import io.jsonwebtoken.*;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Map;
 
-@RequiredArgsConstructor
 @Service
 @Slf4j
 public class JwtService {
@@ -22,14 +19,8 @@ public class JwtService {
     @Value("${app.auth.jwtExpirationMs}")
     private Integer jwtExpirationMs;
 
-    public String generateFromAuthentication(Authentication authentication) {
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
-
-        return build(userPrincipal.getEmail());
-    }
-
     public String generateFromUser(UserReadonly user) {
-        return build(user.email());
+        return build(user);
     }
 
     public String getEmail(String token) {
@@ -55,9 +46,17 @@ public class JwtService {
         return false;
     }
 
-    private String build(String subject) {
+    private String build(UserReadonly userReadonly) {
+        Claims claims = Jwts.claims().setSubject(userReadonly.email());
+        claims.putAll(Map.of(
+                "id", userReadonly.id(),
+                "name", userReadonly.name(),
+                "email", userReadonly.email()
+        ));
+
         return Jwts.builder()
-                .setSubject(subject)
+                .setSubject(userReadonly.email())
+                .setClaims(claims)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

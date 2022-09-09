@@ -45,6 +45,15 @@ public class UserService {
         return userReadOnlyToAuthenticatedUser.apply(save(user));
     }
 
+    public AuthenticatedUser socialLoginAuthenticate(User user) {
+        return ofNullable(user)
+                .map(User::email)
+                .map(repository::findByEmail)
+                .map(userEntityToUserReadOnly)
+                .map(userReadOnlyToAuthenticatedUser)
+                .orElseGet(() -> userReadOnlyToAuthenticatedUser.apply(save(user)));
+    }
+
     public UserEntity getCurrentUser() {
         var userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return repository

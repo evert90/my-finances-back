@@ -2,6 +2,20 @@
 app:
   auth:
     jwtExpirationMs: 604800000
+    redirectUrl: ${FRONT_URL:}/auth/login
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            scope:
+              - email
+              - profile
+          github:
+            scope:
+              - user:email
+              - user:read
 
 #SWAGGER
 springdoc:
