@@ -8,14 +8,14 @@ spring:
     oauth2:
       client:
         registration:
+          github:
+            scope:
+              - user:email
+              - read:user
           google:
             scope:
               - email
               - profile
-          github:
-            scope:
-              - user:email
-              - user:read
 
 #SWAGGER
 springdoc:
