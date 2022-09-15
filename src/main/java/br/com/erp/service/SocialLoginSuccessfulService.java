@@ -2,16 +2,11 @@ package br.com.erp.service;
 
 import br.com.erp.bean.user.AuthenticatedUser;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriUtils;
 
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.List;
-
-import static java.nio.charset.Charset.defaultCharset;
 
 @Service
 @RequiredArgsConstructor
