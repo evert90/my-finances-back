@@ -36,6 +36,7 @@ public class JobFinancialRecordRecurrence {
                     var nextDate = recurrenceDateService.getNext(entity);
                     if(nextDate.isAfter(entity.getDate()) && notExist(entity, nextDate)) {
                         repository.save(toFinancialRecordEntity.apply(entity));
+                        log.info("Adicionado registro de recorrência");
                     }
                 });
         log.info("Concluído job de recorrência de registros financeiros");

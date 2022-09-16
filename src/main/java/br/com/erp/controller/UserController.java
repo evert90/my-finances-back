@@ -36,6 +36,12 @@ public class UserController {
 
     @GetMapping("/auth/social/success")
     RedirectView socialLoginSuccess(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
+        if(oAuth2AuthenticationToken == null) {
+            RedirectView redirectView = new RedirectView();
+            redirectView.setContextRelative(true);
+            redirectView.setUrl("/api/users/auth/logout");
+            return redirectView;
+        }
         var user = socialLoginSuccessfulService.authenticate(oAuth2AuthenticationToken);
 
         RedirectView redirectView = new RedirectView();
@@ -47,6 +53,13 @@ public class UserController {
     RedirectView socialLoginFailure() {
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(redirectUrl.concat("?socialLoginFailure=true"));
+        return redirectView;
+    }
+
+    @GetMapping("/auth/logout/success")
+    RedirectView logoutSuccess() {
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl(redirectUrl.concat("?logoutSuccess=true"));
         return redirectView;
     }
 }
