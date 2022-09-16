@@ -67,7 +67,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .oauth2Login()
                 .defaultSuccessUrl("/api/users/auth/social/success", true)
-                .failureUrl("/api/users/auth/social/failure");
+                .failureUrl("/api/users/auth/social/failure")
+                .and()
+                .logout()
+                .logoutUrl("/api/users/auth/logout")
+                .logoutSuccessUrl("/api/users/auth/logout/success")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(corsPreflightFilter(), CorsFilter.class);
