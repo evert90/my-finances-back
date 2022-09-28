@@ -15,6 +15,7 @@ import static java.math.BigDecimal.valueOf;
 import static java.time.LocalDateTime.now;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
 @Service
@@ -36,12 +37,12 @@ public class FinancialRecordRecurrenceEntityToFinancialRecordEntity
                 .type(financialRecord.getType())
                 .date(recurrenceDateService.getNext(financialRecord))
                 .tags(ofNullable(financialRecord.getTags())
-                        .orElseGet(Collections::emptyList)
+                        .orElseGet(Collections::emptySet)
                         .stream()
                         .map(it -> tagRepository.findByUserAndName(financialRecord.getUser(), it.getName())
                                 .orElseThrow(() ->
                                         new RuntimeException("Erro ao buscar tags para cadastro de registro recorrente")))
-                        .collect(toList()))
+                        .collect(toSet()))
                 .user(financialRecord.getUser())
                 .paid(financialRecord.getType() == FinancialRecordType.EXPENSE ? false : null)
                 .createdAt(now())

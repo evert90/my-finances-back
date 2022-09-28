@@ -5,6 +5,7 @@ import br.com.erp.bean.tag.Tag;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 public record Asset (
     Long id,
@@ -20,5 +21,5 @@ public record Asset (
     String bank,
     BigDecimal rate,
     Boolean liquidez,
-    List<Tag> tags
+    Set<Tag> tags
 ) { }

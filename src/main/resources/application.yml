@@ -27,5 +27,5 @@ springdoc:
 #MONITORING
 sentry:
   exception-resolver-order: -2147483647
-  release: 1.6.2
+  release: 1.6.3
   traces-sample-rate: 1.0

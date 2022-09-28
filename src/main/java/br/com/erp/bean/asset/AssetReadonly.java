@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public record AssetReadonly (
     Long id,
@@ -22,7 +23,7 @@ public record AssetReadonly (
     String bank,
     BigDecimal rate,
     Boolean liquidez,
-    List<Tag> tags,
+    Set<Tag> tags,
     LocalDateTime createdAt,
     LocalDateTime updatedAt
 ) {

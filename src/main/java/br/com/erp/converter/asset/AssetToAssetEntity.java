@@ -19,6 +19,7 @@ import java.util.function.Function;
 import static java.time.LocalDateTime.now;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
 @Service
@@ -50,11 +51,11 @@ public class AssetToAssetEntity implements Function<Asset, AssetEntity> {
                 .rate(asset.rate())
                 .liquidez(asset.liquidez())
                 .tags(ofNullable(asset.tags())
-                        .orElseGet(Collections::emptyList)
+                        .orElseGet(Collections::emptySet)
                         .stream()
                         .map(it -> tagRepository.findByUserAndName(user, it.name())
                                         .orElseGet(() -> saveTag(it, user)))
-                        .collect(toList()))
+                        .collect(toSet()))
                 .user(user)
                 .createdAt(getCreatedAt(asset.id(), user))
                 .updatedAt(now())
