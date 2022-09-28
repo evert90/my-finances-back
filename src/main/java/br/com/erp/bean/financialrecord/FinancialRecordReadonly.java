@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public record FinancialRecordReadonly(
         Long id,
@@ -15,7 +16,7 @@ public record FinancialRecordReadonly(
         BigDecimal value,
         LocalDate date,
         FinancialRecordType type,
-        List<Tag> tags,
+        Set<Tag> tags,
         Boolean paid,
         LocalDateTime createdAt,
         LocalDateTime updatedAt

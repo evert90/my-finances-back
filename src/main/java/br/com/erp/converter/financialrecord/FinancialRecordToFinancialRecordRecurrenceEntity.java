@@ -16,6 +16,7 @@ import java.util.function.Function;
 import static java.time.LocalDateTime.now;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
 @Service
@@ -38,11 +39,11 @@ public class FinancialRecordToFinancialRecordRecurrenceEntity
                 .type(financialRecord.type())
                 .date(financialRecord.date())
                 .tags(ofNullable(financialRecord.tags())
-                        .orElseGet(Collections::emptyList)
+                        .orElseGet(Collections::emptySet)
                         .stream()
                         .map(it -> tagRepository.findByUserAndName(user, it.name())
                                 .orElseGet(() -> saveTag(it, user)))
-                        .collect(toList()))
+                        .collect(toSet()))
                 .user(user)
                 .paid(financialRecord.paid())
                 .period(financialRecord.recurrencePeriod())

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.TABLE;
 
@@ -66,7 +67,7 @@ public class FinancialRecordEntity {
             joinColumns = {@JoinColumn(name = "id_financial_record")},
             inverseJoinColumns = {@JoinColumn(name = "id_tag")})
     @Column
-    private List<TagEntity> tags;
+    private Set<TagEntity> tags;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

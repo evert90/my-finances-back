@@ -11,6 +11,7 @@ import java.util.function.Function;
 
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
 @Service
@@ -33,10 +34,10 @@ public class AssetEntityToAssetReadonly implements Function<AssetEntity, AssetRe
                 .rate(entity.getRate())
                 .liquidez(entity.getLiquidez())
                 .tags(ofNullable(entity.getTags())
-                        .orElseGet(Collections::emptyList)
+                        .orElseGet(Collections::emptySet)
                         .stream()
                         .map(tag -> new Tag(tag.getId(), tag.getName()))
-                        .collect(toList()))
+                        .collect(toSet()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .build();
