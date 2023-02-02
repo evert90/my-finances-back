@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'br.com.erp'
-version = '1.6.3'
+version = '1.7.0'
 sourceCompatibility = JavaVersion.VERSION_17
 
 jar {
