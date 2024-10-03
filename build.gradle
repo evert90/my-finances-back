@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'br.com.erp'
-version = '1.7.0'
+version = '1.8.0'
 sourceCompatibility = JavaVersion.VERSION_17
 
 jar {
@@ -43,6 +43,7 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
 	implementation 'io.sentry:sentry-spring-boot-starter:6.4.1'
 	implementation 'io.sentry:sentry-logback:6.4.1'
+	implementation 'nl.martijndwars:web-push:5.1.1'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
