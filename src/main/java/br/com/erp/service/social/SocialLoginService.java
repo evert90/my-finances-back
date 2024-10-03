@@ -1,4 +1,4 @@
-package br.com.erp.service;
+package br.com.erp.service.social;
 
 import br.com.erp.bean.user.AuthenticatedUser;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;

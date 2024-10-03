@@ -1,4 +1,4 @@
-package br.com.erp.service;
+package br.com.erp.service.social;
 
 import br.com.erp.bean.user.AuthenticatedUser;
 import lombok.RequiredArgsConstructor;

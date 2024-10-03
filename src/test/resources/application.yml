@@ -5,6 +5,12 @@ app:
     jwtSecret: testSecret
     redirectUrl: fakeUrl/auth/login
 
+#PUSH-NOTIFICATION
+vapid:
+  public-key: 123456
+  private-key: 7890123
+  subject: test
+
 spring:
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MYSQL
