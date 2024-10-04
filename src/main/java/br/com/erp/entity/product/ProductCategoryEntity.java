@@ -32,14 +32,14 @@ public class ProductCategoryEntity {
     @Column
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "product_categories",
             joinColumns = {@JoinColumn(name = "id_category")},
             inverseJoinColumns = {@JoinColumn(name = "id_product")})
     @Column
     private Set<ProductEntity> products;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 

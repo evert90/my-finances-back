@@ -18,6 +18,7 @@ public record FinancialRecordReadonly(
         FinancialRecordType type,
         Set<Tag> tags,
         Boolean paid,
+        Boolean notification,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 ) {

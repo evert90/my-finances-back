@@ -1,6 +1,6 @@
 package br.com.erp.controller;
 
-import br.com.erp.bean.PushSubscription;
+import br.com.erp.bean.notification.PushSubscription;
 import br.com.erp.service.notification.PushSubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -45,6 +45,7 @@ public class FinancialRecordRecurrenceEntityToFinancialRecordEntity
                         .collect(toSet()))
                 .user(financialRecord.getUser())
                 .paid(financialRecord.getType() == FinancialRecordType.EXPENSE ? false : null)
+                .notification(financialRecord.getNotification())
                 .createdAt(now())
                 .updatedAt(now())
                 .build();

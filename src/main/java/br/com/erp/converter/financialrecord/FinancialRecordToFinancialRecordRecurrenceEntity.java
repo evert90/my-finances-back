@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.function.Function;
 
+import static br.com.erp.bean.financialrecord.FinancialRecordType.EXPENSE;
 import static java.time.LocalDateTime.now;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
@@ -46,6 +47,7 @@ public class FinancialRecordToFinancialRecordRecurrenceEntity
                         .collect(toSet()))
                 .user(user)
                 .paid(financialRecord.paid())
+                .notification(financialRecord.notification())
                 .period(financialRecord.recurrencePeriod())
                 .periodQuantity(financialRecord.recurrenceQuantity())
                 .emptyValue(financialRecord.recurrenceEmptyValue())

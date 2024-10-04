@@ -1,4 +1,4 @@
-package br.com.erp.bean;
+package br.com.erp.bean.notification;
 
 import lombok.Builder;
 

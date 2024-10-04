@@ -53,12 +53,15 @@ public class FinancialRecordRecurrenceEntity {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @Column
     private Boolean paid;
+
+    @Column
+    private Boolean notification;
 
     @Column
     @Enumerated(EnumType.STRING)

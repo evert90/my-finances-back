@@ -1,5 +1,6 @@
 package br.com.erp.converter.financialrecord;
 
+import br.com.erp.bean.financialrecord.FinancialRecordType;
 import br.com.erp.bean.tag.Tag;
 import br.com.erp.bean.financialrecord.FinancialRecord;
 import br.com.erp.entity.FinancialRecordEntity;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.function.Function;
 
+import static br.com.erp.bean.financialrecord.FinancialRecordType.EXPENSE;
 import static java.time.LocalDateTime.now;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
@@ -51,6 +53,7 @@ public class FinancialRecordToFinancialRecordEntity implements Function<Financia
                         .collect(toSet()))
                 .user(user)
                 .paid(financialRecord.paid())
+                .notification(financialRecord.notification())
                 .createdAt(getCreatedAt(financialRecord.id(), user))
                 .updatedAt(now())
                 .build();

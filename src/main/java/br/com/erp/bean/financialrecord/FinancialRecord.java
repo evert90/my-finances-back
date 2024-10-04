@@ -17,6 +17,7 @@ public record FinancialRecord(
         FinancialRecordType type,
         Set<Tag> tags,
         Boolean paid,
+        Boolean notification,
         boolean recurrence,
         RecurrencePeriod recurrencePeriod,
         Integer recurrenceQuantity,

@@ -1,7 +1,7 @@
 package br.com.erp.service.notification;
 
-import br.com.erp.bean.Keys;
-import br.com.erp.bean.PushSubscription;
+import br.com.erp.bean.notification.Keys;
+import br.com.erp.bean.notification.PushSubscription;
 import br.com.erp.entity.PushSubscriptionEntity;
 import br.com.erp.repository.PushSubscriptionRepository;
 import br.com.erp.service.UserService;
