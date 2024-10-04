@@ -26,7 +26,7 @@ public class JobFinancialRecordExpenseNotification {
 
     private final PushSubscriptionService pushSubscriptionService;
 
-    @Scheduled(cron = "0 58 11 * * ?") // 11h
+    @Scheduled(cron = "0 0 11 * * ?") // 11h
     public void run() {
         log.info("Starting expense notification job");
 
