@@ -30,6 +30,7 @@ public class FinancialRecordEntityToFinanacialRecordReadonly implements Function
                         .map(tag -> new Tag(tag.getId(), tag.getName()))
                         .collect(toSet()))
                 .paid(entity.getPaid())
+                .notification(entity.getNotification())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .build();

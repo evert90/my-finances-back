@@ -1,8 +1,9 @@
 package br.com.erp.service.notification;
 
-import br.com.erp.bean.PushNotificationMessage;
-import br.com.erp.bean.PushSubscription;
+import br.com.erp.bean.notification.PushNotificationMessage;
+import br.com.erp.bean.notification.PushSubscription;
 import br.com.erp.entity.AssetEntity;
+import br.com.erp.entity.FinancialRecordEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.martijndwars.webpush.Notification;
 import nl.martijndwars.webpush.PushService;
@@ -55,6 +56,18 @@ public class PushNotificationService {
                 .title("Aviso de vencimento")
                 .message("Seu investimento do banco %s irá vencer em %s"
                         .formatted(asset.getBank(), asset.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))))
+                .build();
+    }
+
+    public PushNotificationMessage getMessage(FinancialRecordEntity financialRecord) {
+        return PushNotificationMessage
+                .builder()
+                .title("Aviso de vencimento")
+                .message("%s irá vencer em %s no valor de R$ %s".formatted(
+                        financialRecord.getName(),
+                        financialRecord.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                        new java.text.DecimalFormat("#,###,##0.00").format(financialRecord.getValue())
+                ))
                 .build();
     }
 }

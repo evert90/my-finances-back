@@ -20,6 +20,14 @@ public interface FinancialRecordRepository extends JpaRepository<FinancialRecord
 
     Set<FinancialRecordEntity> findByUserAndDateBetweenOrderByDateDesc(UserEntity user, LocalDate start, LocalDate end);
 
+    List<FinancialRecordEntity> findByUserAndNotificationAndPaidAndTypeAndDateBetweenOrderByDateDesc(
+            UserEntity user,
+            Boolean notification,
+            Boolean paid,
+            FinancialRecordType type,
+            LocalDate start,
+            LocalDate end);
+
     Long countByUserAndDateAndName(UserEntity user, LocalDate date, String name);
 
     @Query("SELECT new br.com.erp.bean.financialrecord.FinancialRecordTotal(f.type, sum(f.value)) " +

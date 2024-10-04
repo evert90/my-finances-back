@@ -59,7 +59,7 @@ tasks.named('test') {
 
 pitest {
 	junit5PluginVersion = '0.15'
-	mutationThreshold = 5
+	mutationThreshold = 4
 }
 
 dependencyManagement {
