@@ -4,9 +4,9 @@ FROM gradle:7.5.1-jdk17-alpine AS builder
 WORKDIR /app
 
 # Copy Gradle configuration and source files
-COPY build.gradle settings.gradle gradlew ./
+COPY build.gradle jacoco.gradle settings.gradle gradlew ./
 COPY gradle ./gradle
-COPY ./ ./src
+COPY src ./src
 
 # Build the application using the Gradle wrapper (if present) or Gradle directly
 RUN ./gradlew clean assemble --no-daemon
