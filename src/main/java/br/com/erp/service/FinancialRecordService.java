@@ -95,7 +95,9 @@ public class FinancialRecordService {
         log.info("Iniciando busca no banco");
         var result = repository.findByUserOrderByDateDesc(userService.getCurrentUser());
         log.info("Iniciando converter");
-        return result.stream().map(toApi).toList();
+        var mapped = result.stream().map(toApi).toList();
+        log.info("Retornando");
+        return mapped;
     }
 
     @Transactional
