@@ -19,10 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Optional.of;
@@ -98,14 +95,11 @@ public class FinancialRecordService {
         log.info("Iniciando busca no banco");
         var result = repository.findFirst150ByUserOrderByDateDesc(userService.getCurrentUser());
         log.info("Iniciando converter");
+        Iterator<FinancialRecordEntity> iterator = result.iterator();
         List<FinancialRecordReadonly> mapped = new ArrayList<>(result.size());
-        //Integer count = 1;
-        for (FinancialRecordEntity item : result) {
-            //log.info("mapeando {}", count);
-            mapped.add(toApi.apply(item));
-            //count++;
+        while (iterator.hasNext()) {
+            mapped.add(toApi.apply(iterator.next()));
         }
-        //var mapped = result.parallelStream().map(toApi).collect(Collectors.toList());
         log.info("Retornando");
         return mapped;
     }
