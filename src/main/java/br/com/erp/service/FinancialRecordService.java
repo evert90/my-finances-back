@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
@@ -93,7 +92,7 @@ public class FinancialRecordService {
 
     public List<FinancialRecordReadonly> getAll() {
         log.info("Iniciando busca no banco");
-        var result = repository.findFirst150ByUserOrderByDateDesc(userService.getCurrentUser());
+        var result = repository.findFirst100ByUserOrderByDateDesc(userService.getCurrentUser());
         log.info("Iniciando converter");
         Iterator<FinancialRecordEntity> iterator = result.iterator();
         List<FinancialRecordReadonly> mapped = new ArrayList<>(result.size());
