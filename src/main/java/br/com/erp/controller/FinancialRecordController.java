@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
@@ -62,7 +63,7 @@ public class FinancialRecordController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/")
-    Set<FinancialRecordReadonly> getAll() {
+    List<FinancialRecordReadonly> getAll() {
         return service.getAll();
     }
 
