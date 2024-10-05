@@ -96,14 +96,14 @@ public class FinancialRecordService {
 
     public List<FinancialRecordReadonly> getAll() {
         log.info("Iniciando busca no banco");
-        var result = repository.findByUserOrderByDateDesc(userService.getCurrentUser());
+        var result = repository.findFirst150ByUserOrderByDateDesc(userService.getCurrentUser());
         log.info("Iniciando converter");
         List<FinancialRecordReadonly> mapped = new ArrayList<>(result.size());
-        Integer count = 1;
+        //Integer count = 1;
         for (FinancialRecordEntity item : result) {
-            log.info("mapeando {}", count);
+            //log.info("mapeando {}", count);
             mapped.add(toApi.apply(item));
-            count++;
+            //count++;
         }
         //var mapped = result.parallelStream().map(toApi).collect(Collectors.toList());
         log.info("Retornando");
