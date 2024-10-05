@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
@@ -95,7 +96,7 @@ public class FinancialRecordService {
         log.info("Iniciando busca no banco");
         var result = repository.findByUserOrderByDateDesc(userService.getCurrentUser());
         log.info("Iniciando converter");
-        var mapped = result.stream().map(toApi).toList();
+        var mapped = result.parallelStream().map(toApi).collect(Collectors.toList());
         log.info("Retornando");
         return mapped;
     }
