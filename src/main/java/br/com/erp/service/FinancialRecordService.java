@@ -92,7 +92,7 @@ public class FinancialRecordService {
 
     public List<FinancialRecordReadonly> getAll() {
         log.info("Iniciando busca no banco");
-        var result = repository.findFirst100ByUserOrderByDateDesc(userService.getCurrentUser());
+        var result = repository.findByUserOrderByDateDesc(userService.getCurrentUser());
         log.info("Iniciando converter");
         Iterator<FinancialRecordEntity> iterator = result.iterator();
         List<FinancialRecordReadonly> mapped = new ArrayList<>(result.size());
