@@ -62,7 +62,7 @@ public class FinancialRecordEntity {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "financial_record_tags",
             joinColumns = {@JoinColumn(name = "id_financial_record")},
             inverseJoinColumns = {@JoinColumn(name = "id_tag")})

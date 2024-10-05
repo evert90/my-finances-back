@@ -44,24 +44,24 @@ public class UserEntity {
     @Builder.Default
     private Role role = Role.ROLE_USER;
 
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductCategoryEntity> productCategories;
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<ProductCategoryEntity> productCategories;
+//
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<ProductEntity> products;
 
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductEntity> products;
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<FinancialRecordEntity> financialRecords;
 
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<FinancialRecordEntity> financialRecords;
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<TagEntity> tags;
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<TagEntity> tags;
 
 }
