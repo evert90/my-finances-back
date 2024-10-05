@@ -9,6 +9,7 @@ import br.com.erp.converter.TagTotalRepositoryToTagTotal;
 import br.com.erp.converter.financialrecord.FinancialRecordEntityToFinanacialRecordReadonly;
 import br.com.erp.converter.financialrecord.FinancialRecordToFinancialRecordEntity;
 import br.com.erp.converter.financialrecord.FinancialRecordToFinancialRecordRecurrenceEntity;
+import br.com.erp.entity.FinancialRecordEntity;
 import br.com.erp.exception.NotFoundException;
 import br.com.erp.repository.FinancialRecordRecurrenceRepository;
 import br.com.erp.repository.FinancialRecordRepository;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -96,7 +98,11 @@ public class FinancialRecordService {
         log.info("Iniciando busca no banco");
         var result = repository.findByUserOrderByDateDesc(userService.getCurrentUser());
         log.info("Iniciando converter");
-        var mapped = result.parallelStream().map(toApi).collect(Collectors.toList());
+        List<FinancialRecordReadonly> mapped = new ArrayList<>(result.size());
+        for (FinancialRecordEntity item : result) {
+            mapped.add(toApi.apply(item));
+        }
+        //var mapped = result.parallelStream().map(toApi).collect(Collectors.toList());
         log.info("Retornando");
         return mapped;
     }
