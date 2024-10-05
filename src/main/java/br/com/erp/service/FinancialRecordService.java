@@ -91,16 +91,10 @@ public class FinancialRecordService {
     }
 
     public List<FinancialRecordReadonly> getAll() {
-        log.info("Iniciando busca no banco");
-        var result = repository.findByUserOrderByDateDesc(userService.getCurrentUser());
-        log.info("Iniciando converter");
-        Iterator<FinancialRecordEntity> iterator = result.iterator();
-        List<FinancialRecordReadonly> mapped = new ArrayList<>(result.size());
-        while (iterator.hasNext()) {
-            mapped.add(toApi.apply(iterator.next()));
-        }
-        log.info("Retornando");
-        return mapped;
+        return repository.findByUserOrderByDateDesc(userService.getCurrentUser())
+                .stream()
+                .map(toApi)
+                .toList();
     }
 
     @Transactional
