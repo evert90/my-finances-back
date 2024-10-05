@@ -99,8 +99,11 @@ public class FinancialRecordService {
         var result = repository.findByUserOrderByDateDesc(userService.getCurrentUser());
         log.info("Iniciando converter");
         List<FinancialRecordReadonly> mapped = new ArrayList<>(result.size());
+        Integer count = 1;
         for (FinancialRecordEntity item : result) {
+            log.info("mapeando {}", count);
             mapped.add(toApi.apply(item));
+            count++;
         }
         //var mapped = result.parallelStream().map(toApi).collect(Collectors.toList());
         log.info("Retornando");
