@@ -16,7 +16,11 @@ import java.util.Set;
 public interface FinancialRecordRepository extends JpaRepository<FinancialRecordEntity, Long> {
     Set<FinancialRecordEntity> findByType(FinancialRecordType type);
 
-    List<FinancialRecordEntity> findFirst100ByUserOrderByDateDesc(UserEntity user);
+    @Query("SELECT fr from FinancialRecordEntity fr" +
+            " JOIN FETCH fr.tags" +
+            " WHERE fr.user = :user" +
+            " ORDER BY fr.date DESC")
+    List<FinancialRecordEntity> findByUserOrderByDateDesc(UserEntity user);
 
     Set<FinancialRecordEntity> findByUserAndDateBetweenOrderByDateDesc(UserEntity user, LocalDate start, LocalDate end);
 
