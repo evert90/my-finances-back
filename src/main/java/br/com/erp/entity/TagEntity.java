@@ -30,11 +30,11 @@ public class TagEntity {
     @Column
     private String name;
 
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "tags")
-    @Column
-    private Set<FinancialRecordEntity> financialRecords;
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    @ManyToMany(mappedBy = "tags")
+//    @Column
+//    private Set<FinancialRecordEntity> financialRecords;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
