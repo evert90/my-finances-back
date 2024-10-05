@@ -13,11 +13,13 @@ import br.com.erp.exception.NotFoundException;
 import br.com.erp.repository.FinancialRecordRecurrenceRepository;
 import br.com.erp.repository.FinancialRecordRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import static java.util.Optional.of;
@@ -27,6 +29,7 @@ import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class FinancialRecordService {
     private final FinancialRecordRepository repository;
 
@@ -88,11 +91,11 @@ public class FinancialRecordService {
                 .collect(toSet());
     }
 
-    public Set<FinancialRecordReadonly> getAll() {
-        return repository.findByUserOrderByDateDesc(userService.getCurrentUser())
-                .stream()
-                .map(toApi)
-                .collect(toCollection(LinkedHashSet::new));
+    public List<FinancialRecordReadonly> getAll() {
+        log.info("Iniciando busca no banco");
+        var result = repository.findByUserOrderByDateDesc(userService.getCurrentUser());
+        log.info("Iniciando converter");
+        return result.stream().map(toApi).toList();
     }
 
     @Transactional
