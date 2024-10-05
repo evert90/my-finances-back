@@ -6,7 +6,7 @@ WORKDIR /app
 # Copy Gradle configuration and source files
 COPY build.gradle settings.gradle gradlew ./
 COPY gradle ./gradle
-COPY src ./src
+COPY ./ ./src
 
 # Build the application using the Gradle wrapper (if present) or Gradle directly
 RUN ./gradlew clean assemble --no-daemon
