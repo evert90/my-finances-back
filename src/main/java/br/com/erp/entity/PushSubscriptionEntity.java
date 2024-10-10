@@ -19,6 +19,7 @@ public class PushSubscriptionEntity {
     @TableGenerator(name = "pushNotificationGenerator", table = "hibernate_sequences")
     private Long id;
 
+    @Column(length = 1000)
     private String endpoint;
 
     private String authKey;
