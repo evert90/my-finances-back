@@ -44,6 +44,7 @@ public class FinancialRecordService {
 
     private final UserService userService;
 
+    @Transactional
     public FinancialRecordReadonly save(FinancialRecord financialRecord) {
         var financialRecordReadonly = ofNullable(financialRecord)
                 .map(toEntity)
