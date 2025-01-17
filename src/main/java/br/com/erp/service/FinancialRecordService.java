@@ -8,10 +8,7 @@ import br.com.erp.bean.tag.TagTotal;
 import br.com.erp.converter.TagTotalRepositoryToTagTotal;
 import br.com.erp.converter.financialrecord.FinancialRecordEntityToFinanacialRecordReadonly;
 import br.com.erp.converter.financialrecord.FinancialRecordToFinancialRecordEntity;
-import br.com.erp.converter.financialrecord.FinancialRecordToFinancialRecordRecurrenceEntity;
-import br.com.erp.entity.FinancialRecordEntity;
 import br.com.erp.exception.NotFoundException;
-import br.com.erp.repository.FinancialRecordRecurrenceRepository;
 import br.com.erp.repository.FinancialRecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +18,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.*;
 
-import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toSet;
@@ -32,13 +28,11 @@ import static java.util.stream.Collectors.toSet;
 public class FinancialRecordService {
     private final FinancialRecordRepository repository;
 
-    private final FinancialRecordRecurrenceRepository recurrenceRepository;
-
     private final FinancialRecordToFinancialRecordEntity toEntity;
 
-    private final FinancialRecordToFinancialRecordRecurrenceEntity toRecurrenceEntity;
-
     private final FinancialRecordEntityToFinanacialRecordReadonly toApi;
+
+    private final FinancialRecordRecurrenceService financialRecordRecurrenceService;
 
     private final TagTotalRepositoryToTagTotal toTagTotal;
 
@@ -52,7 +46,7 @@ public class FinancialRecordService {
                 .map(toApi)
                 .orElseThrow(() -> new RuntimeException("Erro ao salvar/retornar o registro financeiro"));
 
-        saveRecurrence(financialRecord);
+        financialRecordRecurrenceService.save(financialRecord);
 
         return financialRecordReadonly;
     }
@@ -107,12 +101,4 @@ public class FinancialRecordService {
         repository.delete(entity);
     }
 
-    private void saveRecurrence(FinancialRecord financialRecord) {
-        if(financialRecord.recurrence()){
-            of(financialRecord)
-                    .map(toRecurrenceEntity)
-                    .map(recurrenceRepository::save)
-                    .orElseThrow(() -> new RuntimeException("Erro ao salvar registro de recorrência"));
-        }
-    }
 }
