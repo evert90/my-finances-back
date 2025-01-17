@@ -17,7 +17,7 @@ public interface FinancialRecordRepository extends JpaRepository<FinancialRecord
     Set<FinancialRecordEntity> findByType(FinancialRecordType type);
 
     @Query("SELECT DISTINCT fr from FinancialRecordEntity fr" +
-            " JOIN FETCH fr.tags" +
+            " LEFT JOIN FETCH fr.tags" +
             " WHERE fr.user = :user" +
             " ORDER BY fr.date DESC")
     List<FinancialRecordEntity> findByUserOrderByDateDesc(UserEntity user);
