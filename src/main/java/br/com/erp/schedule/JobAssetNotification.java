@@ -26,7 +26,7 @@ public class JobAssetNotification {
 
     private final PushSubscriptionService pushSubscriptionService;
 
-    @Scheduled(cron = "0 11 0 * * ?") // 11h
+    @Scheduled(cron = "0 0 11 * * ?") // 11h
     public void run() {
         log.info("Starting asset notification job");
 
