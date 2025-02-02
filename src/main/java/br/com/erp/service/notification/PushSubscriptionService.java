@@ -48,6 +48,10 @@ public class PushSubscriptionService {
         return repository.findAll();
     }
 
+    public List<PushSubscriptionEntity> findByCurrentUser() {
+        return repository.findByUser(userService.getCurrentUser());
+    }
+
     public PushSubscription getPushSubscription(PushSubscriptionEntity entity) {
         return PushSubscription
                 .builder()

@@ -14,5 +14,5 @@ public interface AssetRepository extends JpaRepository<AssetEntity, Long> {
 
     List<AssetEntity> findByUserOrderByEndDateAsc(UserEntity user);
 
-    List<AssetEntity> findByUserAndTypeAndEndDateBetween(UserEntity user, AssetType type, LocalDate start, LocalDate end);
+    List<AssetEntity> findByUserAndTypeAndEndDateBetweenAndEndValueIsNull(UserEntity user, AssetType type, LocalDate start, LocalDate end);
 }

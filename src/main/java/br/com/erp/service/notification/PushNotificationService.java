@@ -4,16 +4,20 @@ import br.com.erp.bean.notification.PushNotificationMessage;
 import br.com.erp.bean.notification.PushSubscription;
 import br.com.erp.entity.AssetEntity;
 import br.com.erp.entity.FinancialRecordEntity;
+import br.com.erp.exception.NotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.martijndwars.webpush.Notification;
 import nl.martijndwars.webpush.PushService;
 import nl.martijndwars.webpush.Utils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Security;
 import java.time.format.DateTimeFormatter;
+
+import static java.util.Optional.of;
 
 @Service
 public class PushNotificationService {
@@ -29,8 +33,42 @@ public class PushNotificationService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    @Autowired
+    private PushSubscriptionService pushSubscriptionService;
+
     public PushNotificationService() {
         Security.addProvider(new BouncyCastleProvider());
+    }
+
+    public void sendPushNotificationTest() throws Exception {
+        var subscriptions = of(pushSubscriptionService.findByCurrentUser())
+                .filter(it -> !it.isEmpty())
+                .orElseThrow(() -> new NotFoundException("Notificação não habilitada"))
+                .stream()
+                .map(it -> pushSubscriptionService.getPushSubscription(it))
+                .toList();
+
+        for (PushSubscription subscription : subscriptions) {
+            Notification notification = new Notification(
+                    subscription.endpoint(),
+                    subscription.keys().p256dh(),
+                    subscription.keys().auth(),
+                    objectMapper.writeValueAsString(PushNotificationMessage
+                            .builder()
+                            .title("Notificação de teste")
+                            .message("Recebida com sucesso")
+                            .build()
+                    )
+            );
+
+            PushService pushService = new PushService()
+                    .setPublicKey(Utils.loadPublicKey(publicKey))
+                    .setPrivateKey(Utils.loadPrivateKey(privateKey))
+                    .setSubject(subject);
+
+            pushService.send(notification);
+        }
+
     }
 
     public void sendPushNotification(PushSubscription subscription, PushNotificationMessage message) throws Exception {

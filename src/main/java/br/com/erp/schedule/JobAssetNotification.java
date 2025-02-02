@@ -26,7 +26,7 @@ public class JobAssetNotification {
 
     private final PushSubscriptionService pushSubscriptionService;
 
-    @Scheduled(cron = "0 0 11 * * ?") // 11h
+    @Scheduled(cron = "0 11 0 * * ?") // 11h
     public void run() {
         log.info("Starting asset notification job");
 
@@ -50,6 +50,6 @@ public class JobAssetNotification {
     }
 
     private List<AssetEntity> getAssets(UserEntity user) {
-        return assetRepository.findByUserAndTypeAndEndDateBetween(user, RENDA_FIXA, LocalDate.now(), LocalDate.now().plusDays(1));
+        return assetRepository.findByUserAndTypeAndEndDateBetweenAndEndValueIsNull(user, RENDA_FIXA, LocalDate.now(), LocalDate.now().plusDays(1));
     }
 }
