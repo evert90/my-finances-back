@@ -44,6 +44,7 @@ public class AssetToAssetEntity implements Function<Asset, AssetEntity> {
                 .endValue(asset.endValue())
                 .initialDate(asset.initialDate())
                 .endDate(asset.endDate())
+                .redemptionDate(asset.redemptionDate())
                 .type(asset.type())
                 .rendaFixaType(asset.rendaFixaType())
                 .rendaFixaRateType(asset.rendaFixaRateType())

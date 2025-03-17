@@ -19,7 +19,7 @@ task unzipNewrelic(type: Copy) {
 }
 
 group = 'br.com.erp'
-version = '1.8.0'
+version = '1.9.0'
 sourceCompatibility = JavaVersion.VERSION_17
 
 jar {

@@ -17,6 +17,7 @@ public record AssetReadonly (
     BigDecimal endValue,
     LocalDate initialDate,
     LocalDate endDate,
+    LocalDate redemptionDate,
     AssetType type,
     AssetRendaFixaType rendaFixaType,
     AssetRendaFixaRateType rendaFixaRateType,

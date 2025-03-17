@@ -27,6 +27,7 @@ public class AssetEntityToAssetReadonly implements Function<AssetEntity, AssetRe
                 .endValue(entity.getEndValue())
                 .initialDate(entity.getInitialDate())
                 .endDate(entity.getEndDate())
+                .redemptionDate(entity.getRedemptionDate())
                 .type(entity.getType())
                 .rendaFixaType(entity.getRendaFixaType())
                 .rendaFixaRateType(entity.getRendaFixaRateType())
