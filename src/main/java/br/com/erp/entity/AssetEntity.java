@@ -45,6 +45,9 @@ public class AssetEntity {
     private LocalDate endDate;
 
     @Column
+    private LocalDate redemptionDate;
+
+    @Column
     @Enumerated(EnumType.STRING)
     private AssetType type;
 
