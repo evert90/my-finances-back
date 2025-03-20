@@ -1,15 +1,15 @@
 package br.com.erp.entity;
 
 import br.com.erp.bean.user.Role;
-import br.com.erp.entity.product.ProductCategoryEntity;
-import br.com.erp.entity.product.ProductEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
-import java.util.Set;
-
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.GenerationType.TABLE;
 
 @Data
 @Builder
@@ -17,6 +17,7 @@ import static javax.persistence.GenerationType.*;
 @AllArgsConstructor
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 @Entity
+@Audited
 public class UserEntity {
 
     public UserEntity(String name, String email, String password) {

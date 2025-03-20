@@ -3,6 +3,7 @@ package br.com.erp.entity;
 import br.com.erp.bean.tag.TagTotalDTO;
 import br.com.erp.bean.financialrecord.FinancialRecordType;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -37,6 +38,7 @@ import static javax.persistence.GenerationType.TABLE;
 @AllArgsConstructor
 @Table(name = "financial_record")
 @Entity
+@Audited
 public class FinancialRecordEntity {
 
     @Id
