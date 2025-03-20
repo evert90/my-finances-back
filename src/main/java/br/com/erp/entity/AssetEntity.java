@@ -4,6 +4,7 @@ import br.com.erp.bean.asset.AssetType;
 import br.com.erp.bean.asset.AssetRendaFixaRateType;
 import br.com.erp.bean.asset.AssetRendaFixaType;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,6 +21,7 @@ import static javax.persistence.GenerationType.TABLE;
 @AllArgsConstructor
 @Table(name = "asset")
 @Entity
+@Audited
 public class AssetEntity {
     @Id
     @GeneratedValue(strategy = TABLE, generator = "financialRecordGenerator")

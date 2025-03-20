@@ -3,6 +3,7 @@ package br.com.erp.entity;
 import br.com.erp.bean.financialrecord.FinancialRecordType;
 import br.com.erp.bean.recurrence.RecurrencePeriod;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ import static javax.persistence.GenerationType.TABLE;
 @AllArgsConstructor
 @Table(name = "financial_record_recurrence")
 @Entity
+@Audited
 public class FinancialRecordRecurrenceEntity {
 
     @Id

@@ -1,6 +1,7 @@
 package br.com.erp.entity;
 
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ import static javax.persistence.GenerationType.TABLE;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Audited
 public class PushSubscriptionEntity {
 
     @Id

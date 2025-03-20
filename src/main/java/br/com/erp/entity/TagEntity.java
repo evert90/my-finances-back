@@ -4,9 +4,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.TABLE;
 
@@ -14,6 +14,7 @@ import static javax.persistence.GenerationType.TABLE;
 @NoArgsConstructor
 @Table(name = "tag", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "user_id"})})
 @Entity
+@Audited
 public class TagEntity {
 
     public TagEntity(Long id, String name, UserEntity user) {
