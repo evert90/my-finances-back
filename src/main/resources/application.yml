@@ -26,6 +26,6 @@ springdoc:
 
 #MONITORING
 sentry:
-  exception-resolver-order: -2147483647
+  exception-resolver-order: 0
   release: ${HEROKU_BUILD_COMMIT:0.0.0}
   traces-sample-rate: 1.0
