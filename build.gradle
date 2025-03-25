@@ -19,7 +19,7 @@ task unzipNewrelic(type: Copy) {
 }
 
 group = 'br.com.erp'
-version = '1.9.1'
+version = System.getenv("HEROKU_BUILD_COMMIT") ?: "0.0.0"
 sourceCompatibility = JavaVersion.VERSION_17
 
 jar {
