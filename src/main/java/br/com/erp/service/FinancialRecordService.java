@@ -86,7 +86,7 @@ public class FinancialRecordService {
     }
 
     public List<FinancialRecordReadonly> getAll() {
-        return repository.findByUserOrderByDateDesc(userService.getCurrentUser())
+        return repository.findByUserOrderByDateAndNameAsc(userService.getCurrentUser())
                 .stream()
                 .map(toApi)
                 .toList();
